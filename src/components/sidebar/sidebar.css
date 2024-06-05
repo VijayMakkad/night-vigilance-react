@@ -1,0 +1,61 @@
+/* sidebar.css */
+
+.sidebar {
+  width: 21%;
+  height: 100%;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+img {
+  width: 148px;
+}
+
+.logo {
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.options {
+  width: 100%;
+  height: 98vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #0060B6;
+}
+
+.iq-menu {
+  width: 100%;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.iq-menu li {
+  padding: 10px 90px 10px 90px;
+}
+
+.iq-menu li a {
+  text-decoration: none;
+  color: white;
+  display: flex;
+  margin-right: 100px;
+  align-items: center;
+}
+
+
+.iq-menu li.active {
+  background-color: rgba(0, 0, 0, 0.5); /* Active option background color */
+  border-left: 6px solid rgb(15, 16, 16);
+  transition: all ease-in-out 0.2s;
+}
+
+.iq-menu li:hover {
+  background-color:  rgba(0, 0, 0, 0.5) !important;/* Change background color when li is hovered */
+  border-left: 6px solid rgb(15, 16, 16);
+  transition: all ease-in-out 0.3s;
+}

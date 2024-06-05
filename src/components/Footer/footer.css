@@ -1,0 +1,37 @@
+.bg-white {
+  background-color: #f5f5f5 !important;
+}
+
+.iq-footer {
+  padding: 20px 0;
+}
+
+.iq-footer .list-inline {
+  padding-left: 0;
+  list-style: none;
+}
+
+.iq-footer .list-inline-item {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.iq-footer .list-inline-item a {
+  color: #333;
+  text-decoration: none;
+}
+
+.iq-footer .list-inline-item a:hover {
+  text-decoration: underline;
+}
+
+.iq-footer .text-right {
+  text-align: right;
+}
+
+@media (max-width: 767px) {
+  .iq-footer .text-right {
+    text-align: left;
+    margin-top: 10px;
+  }
+}

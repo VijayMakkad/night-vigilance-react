@@ -1,0 +1,159 @@
+/* dashboard.css */
+.dashboard {
+    background-color: #ffffff;
+    padding: 25px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.upper-component{
+    margin-bottom: 12px;
+}
+
+.upper-component .col {
+    flex: 1;
+    padding: 20px;
+    background-color: #104376;
+    text-align: center;
+}
+
+
+.lower-component .col {
+    flex: 1;
+    padding: 20px;
+    /* font-size: 20px; */
+    background-color: #424242;
+    text-align: center;
+    justify-content: flex-end;
+}
+.lower-component h4{
+    margin-right: 325px;
+}
+.lower-component{
+    margin-bottom: 25px;
+}
+/* .card{
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+} */
+
+/* Table Styles */
+.table-responsive {
+    /* margin-top: 20px; */
+    border-radius: 10px;
+    overflow-x: auto; /* Allow horizontal scroll if overflow */
+    overflow-y: hidden; /* Prevent vertical scroll */
+    padding-bottom: 5px; /* Add padding for better spacing */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #104376;
+    color: #ffffff;
+}
+
+thead th {
+    padding: 15px; /* Adjusted padding */
+    font-weight: 700;
+    text-align: left;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+tbody td {
+    padding: 15px; /* Adjusted padding for larger box size */
+    border: 1px solid #ddd;
+}
+
+tbody a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+tbody a:hover {
+    text-decoration: underline;
+}
+
+.btn.icon-btn {
+    padding: 5px 10px; /* Adjusted button padding for better size */
+    margin: 0 2px; /* Reduced margin for better fitting */
+}
+
+.btn-outline-dark {
+    border-color: #212529;
+    color: #212529;
+}
+
+.btn-outline-success {
+    border-color: #28a745;
+    color: #28a745;
+}
+
+.btn-outline-danger {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+.card-title {
+    color: #ffffff;
+}
+
+.card {
+    background-color: #ffffff;
+    height: auto; /* Adjusted to fit content */ 
+    /* margin-top: 5px; */
+    margin: 11px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Adjustments for Table Container */
+.dashboard .card .table-responsive {
+    background-color: #e6f7ff; /* Light blue background */
+    border: 1px solid #ddd; /* Border for the table container */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for the table container */
+    border-radius: 10px;
+    padding: 12px;
+    overflow-x: auto; /* Enable horizontal scroll */
+}
+
+/* Ensure all buttons fit within the cell */
+tbody td .btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 5px; /* Space between buttons */
+    flex-wrap: nowrap;
+}
+
+.entries-select {
+    display: flex;
+    align-items: center;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.search-box input {
+    width: 200px;
+}
+
+.search-box button {
+    height: 38px;
+}
