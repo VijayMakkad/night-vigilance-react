@@ -29,11 +29,12 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-  background-color: #e9edf4;
+  background-color: #e5eaf4;
 }
 
 .heading h4 {
   font-weight: 400;
+  padding: 10px;
 }
 
 .close-btn {

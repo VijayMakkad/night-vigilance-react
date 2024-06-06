@@ -209,6 +209,7 @@ const Dashboard = () => {
                         className="btn icon-btn btn-outline-dark btn-sm"
                         data-bs-toggle="modal"
                         data-bs-target="#editModalToggle"
+                        onClick={() => setPopupVisible(true)}
                       >
                         <FontAwesomeIcon icon={faPencil} aria-hidden="true" />
                       </button>
@@ -217,6 +218,12 @@ const Dashboard = () => {
                         className="btn icon-btn btn-outline-dark btn-sm"
                       >
                         <FontAwesomeIcon icon={faEye} aria-hidden="true" />
+                      </button>
+                      <button
+                        type="button"
+                        className="btn icon-btn btn-outline-success btn-sm"
+                      >
+                        <FontAwesomeIcon icon={faPlus} aria-hidden="true" />
                       </button>
                       <button
                         type="button"
@@ -230,14 +237,14 @@ const Dashboard = () => {
               ))}
             </tbody>
           </table>
-        <div className="row mt-2">
-          <div className="col d-flex justify-content-between">
-            <div>
-              Showing {filteredData.length > 0 ? 1 : 0} to{' '}
-              {Math.min(entriesPerPage, filteredData.length)} of{' '}
-              {filteredData.length} entries
+          <div className="row mt-2">
+            <div className="col d-flex justify-content-between">
+              <div>
+                Showing {filteredData.length > 0 ? 1 : 0} to{' '}
+                {Math.min(entriesPerPage, filteredData.length)} of{' '}
+                {filteredData.length} entries
+              </div>
             </div>
-          </div>
           </div>
         </div>
       </div>

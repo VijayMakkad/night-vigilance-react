@@ -9,6 +9,7 @@ import {
   faXmark,
   faPlus,
 } from '@fortawesome/free-solid-svg-icons'
+import AddPopup from './../Popup/AddPopup'
 
 const data = [
   {
@@ -44,6 +45,7 @@ const data = [
 const AddMemberForm = ({ trigger, setTrigger }) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [entries, setEntries] = useState(10)
+  const [popupVisible, setPopupVisible] = useState(false)
 
   const filteredData = data.filter((item) => {
     return (
@@ -55,6 +57,10 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
       item.scheduleTime.includes(searchTerm)
     )
   })
+
+  const closeParentPopup = () => {
+    setTrigger(false)
+  }
 
   return trigger ? (
     <div className="popup">
@@ -127,7 +133,10 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
         </div>
         <div className="row">
           <div className="col-12 mb-3 btun">
-            <button className="btn btn-success ">
+            <button
+              className="btn btn-success "
+              onClick={() => setPopupVisible(true)}
+            >
               {' '}
               <FontAwesomeIcon icon={faPlus} /> Add Members
             </button>
@@ -173,9 +182,9 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
                   </div>
                 </div>
               </div>
-              <table className="table">
-                <thead className='tbs'>
-                  <tr >
+              <table id="example" className="nowrap table-bordered " style={{ width: '100%' }}>
+                <thead className="tbs">
+                  <tr>
                     <th>Sr. No.</th>
                     <th>Location</th>
                     <th>Team Head</th>
@@ -198,7 +207,7 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
                       <td>{item.scheduleTime}</td>
                       <td className="text-center">
                         <div className="btn-group">
-                          <button className="btn icon-btn btn-outline-dark btn-sm me-2">
+                          <button className="btn icon-btn btn-outline-success btn-sm me-2" >
                             <FontAwesomeIcon
                               icon={faPencil}
                               aria-hidden="true"
@@ -232,6 +241,7 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
           </div>
         </div>
       </div>
+      <AddPopup trigger={popupVisible} setTrigger={setPopupVisible} closeParent={closeParentPopup}/>
     </div>
   ) : null
 }
