@@ -5,10 +5,12 @@ import {
   faPlus,
   faPencil,
   faEye,
+  faXmark,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons'
-import './dashboard.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import AddMemberForm from './../AddMemberFrom/AddMemberForm'
+import './dashboard.css'
 
 const data = [
   {
@@ -44,6 +46,7 @@ const data = [
 const Dashboard = () => {
   const [entriesPerPage, setEntriesPerPage] = useState(10)
   const [searchTerm, setSearchTerm] = useState('')
+  const [popupVisible, setPopupVisible] = useState(false)
 
   const handleEntriesChange = (e) => {
     setEntriesPerPage(Number(e.target.value))
@@ -105,10 +108,7 @@ const Dashboard = () => {
             <div className="col roaster">
               <button
                 className="btn btn-info text-white"
-                style={{
-                  width: '200px',
-                  fontSize: '1.2rem',
-                }}
+                style={{ width: '200px', fontSize: '1.2rem' }}
               >
                 <FontAwesomeIcon icon={faSearch} style={{ color: '#ffffff' }} />
                 &nbsp; Search
@@ -117,12 +117,13 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="row lower-component">
-          <div className="col-lg-12 d-flex flex-wrap roaster">
-            <div className="col">
+          <div className="col-lg-12 d-flex flex-wrap">
+            <div className="col roaster">
               <h4 className="card-title text-white">Roaster Summary</h4>
-            </div>
-            <div className="col">
-              <button className="btn btn-success">
+              <button
+                className="btn btn-success"
+                onClick={() => setPopupVisible(true)}
+              >
                 <FontAwesomeIcon icon={faPlus} style={{ color: '#ffffff' }} />
                 &nbsp; Add Members
               </button>
@@ -160,7 +161,7 @@ const Dashboard = () => {
                 className="btn btn-outline-secondary ms-2"
                 onClick={handleClearSearch}
               >
-                Clear
+                <FontAwesomeIcon icon={faXmark} style={{ color: '#000000' }} />
               </button>
             </div>
           </div>
@@ -214,25 +215,12 @@ const Dashboard = () => {
                       <button
                         type="button"
                         className="btn icon-btn btn-outline-dark btn-sm"
-                        data-bs-toggle="modal"
-                        data-bs-target="#viewRoaster-1"
                       >
                         <FontAwesomeIcon icon={faEye} aria-hidden="true" />
                       </button>
                       <button
                         type="button"
-                        className="btn icon-btn btn-outline-success btn-sm"
-                        data-bs-toggle="tooltip"
-                        data-original-title="Add Report"
-                        data-bs-target="#addreport&editModalToggle"
-                      >
-                        <FontAwesomeIcon icon={faPlus} aria-hidden="true" />
-                      </button>
-                      <button
-                        type="button"
                         className="btn icon-btn btn-outline-danger btn-sm"
-                        data-bs-toggle="modal"
-                        data-bs-target="#exampleModal"
                       >
                         <FontAwesomeIcon icon={faTrash} aria-hidden="true" />
                       </button>
@@ -242,8 +230,18 @@ const Dashboard = () => {
               ))}
             </tbody>
           </table>
+        <div className="row mt-2">
+          <div className="col d-flex justify-content-between">
+            <div>
+              Showing {filteredData.length > 0 ? 1 : 0} to{' '}
+              {Math.min(entriesPerPage, filteredData.length)} of{' '}
+              {filteredData.length} entries
+            </div>
+          </div>
+          </div>
         </div>
       </div>
+      <AddMemberForm trigger={popupVisible} setTrigger={setPopupVisible} />
     </div>
   )
 }

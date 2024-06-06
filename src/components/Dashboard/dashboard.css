@@ -23,12 +23,8 @@
     padding: 20px;
     /* font-size: 20px; */
     background-color: #424242;
-    text-align: center;
-    justify-content: flex-end;
 }
-.lower-component h4{
-    margin-right: 325px;
-}
+
 .lower-component{
     margin-bottom: 25px;
 }
@@ -115,7 +111,7 @@ tbody a:hover {
     background-color: #ffffff;
     height: auto; /* Adjusted to fit content */ 
     /* margin-top: 5px; */
-    margin: 11px;
+    /* margin: 11px; */
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -146,7 +142,6 @@ tbody td .btn-group {
 .search-box {
     display: flex;
     align-items: center;
-    gap: 5px;
     margin-bottom: 10px;
 }
 
@@ -156,4 +151,9 @@ tbody td .btn-group {
 
 .search-box button {
     height: 38px;
+}
+
+.roaster{
+    display: flex;
+    justify-content: space-between;
 }
