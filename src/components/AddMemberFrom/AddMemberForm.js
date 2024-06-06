@@ -7,6 +7,7 @@ import {
   faEye,
   faTrash,
   faXmark,
+  faPlus,
 } from '@fortawesome/free-solid-svg-icons'
 
 const data = [
@@ -126,19 +127,20 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
         </div>
         <div className="row">
           <div className="col-12 mb-3 btun">
-            <button className="btn btn-success ">Add Members</button>
+            <button className="btn btn-success ">
+              {' '}
+              <FontAwesomeIcon icon={faPlus} /> Add Members
+            </button>
           </div>
         </div>
         <div className="row mb-3"></div>
         <div className="row">
           <div className="col-12">
             <div className="table-responsive">
-              <div className='d-flex justify-content-between'>
+              <div className="d-flex justify-content-between">
                 <div className="col-sm-2">
                   <div className="entries-select">
-                    <label htmlFor="entries" className="form-label">
-                      Show
-                    </label>
+                    <span>Show</span>
                     <select
                       id="entries"
                       className="form-select form-select-sm ms-2"
@@ -166,14 +168,14 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
                       className="btn btn-outline-secondary ms-2"
                       onClick={() => setSearchTerm('')}
                     >
-                        <FontAwesomeIcon icon={faXmark} />
+                      <FontAwesomeIcon icon={faXmark} />
                     </button>
                   </div>
                 </div>
               </div>
-              <table className="table table-bordered">
-                <thead>
-                  <tr>
+              <table className="table">
+                <thead className='tbs'>
+                  <tr >
                     <th>Sr. No.</th>
                     <th>Location</th>
                     <th>Team Head</th>
