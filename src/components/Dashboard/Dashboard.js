@@ -11,6 +11,9 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css'
 import AddMemberForm from './../AddMemberFrom/AddMemberForm'
 import './dashboard.css'
+import TeamView from './../TeamViewDashboard/TeamViewDashboard'
+import TeamDetails from './../TeamDetails/TeamDetails'
+
 
 const data = [
   {
@@ -47,6 +50,11 @@ const Dashboard = () => {
   const [entriesPerPage, setEntriesPerPage] = useState(10)
   const [searchTerm, setSearchTerm] = useState('')
   const [popupVisible, setPopupVisible] = useState(false)
+  const [teamPopupVisible, setTeamPopupVisible] = useState(false)
+  const [viewMemberVisible, setViewMemberVisible] = useState(false)
+  const [selectedMember, setSelectedMember] = useState(null)
+
+
 
   const handleEntriesChange = (e) => {
     setEntriesPerPage(Number(e.target.value))
@@ -69,6 +77,16 @@ const Dashboard = () => {
       item.scheduleDate.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.scheduleTime.toLowerCase().includes(searchTerm.toLowerCase())
   )
+    const handleViewMemberClick = (member) => {
+      setSelectedMember(member)
+      setViewMemberVisible(true)
+    }
+
+   const handleTeamPopup = () => {
+     console.log('Opening Team Popup')
+     setTeamPopupVisible(true)
+   }
+
 
   return (
     <div className="dashboard">
@@ -194,11 +212,7 @@ const Dashboard = () => {
                   <td>{item.scheduleDate}</td>
                   <td>{item.scheduleTime}</td>
                   <td>
-                    <a
-                      href="#"
-                      data-bs-toggle="modal"
-                      data-bs-target="#viewRoaster"
-                    >
+                    <a href="#" onClick={handleTeamPopup}>
                       View Member
                     </a>
                   </td>
@@ -216,6 +230,7 @@ const Dashboard = () => {
                       <button
                         type="button"
                         className="btn icon-btn btn-outline-dark btn-sm"
+                        onClick={() => handleViewMemberClick(item)}
                       >
                         <FontAwesomeIcon icon={faEye} aria-hidden="true" />
                       </button>
@@ -248,7 +263,16 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      <TeamDetails
+        trigger={teamPopupVisible}
+        setTrigger={setTeamPopupVisible}
+      />
       <AddMemberForm trigger={popupVisible} setTrigger={setPopupVisible} />
+      <TeamView
+        trigger={viewMemberVisible}
+        setTrigger={setViewMemberVisible}
+        member={selectedMember}
+      />
     </div>
   )
 }

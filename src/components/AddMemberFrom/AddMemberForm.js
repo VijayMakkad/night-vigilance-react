@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './AddMemberForm.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -10,6 +10,8 @@ import {
   faPlus,
 } from '@fortawesome/free-solid-svg-icons'
 import AddPopup from './../Popup/AddPopup'
+import TeamView from './../TeamViewPopup/TeamViewPopup'
+import EditView from './../EditViewPopup/EditViewPopup'
 
 const data = [
   {
@@ -46,6 +48,8 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [entries, setEntries] = useState(10)
   const [popupVisible, setPopupVisible] = useState(false)
+  const [teamViewVisible, setTeamViewVisible] = useState(false)
+  const [editVisible, setEditViewVisible] = useState(false)
 
   const filteredData = data.filter((item) => {
     return (
@@ -61,6 +65,17 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
   const closeParentPopup = () => {
     setTrigger(false)
   }
+
+  useEffect(() => {
+    const closePopup = (e) => {
+      if (e.key === 'Escape') {
+        setTrigger(false)
+      }
+    }
+    window.addEventListener('keydown', closePopup)
+    return () => window.removeEventListener('keydown', closePopup)
+  }, [])
+
 
   return trigger ? (
     <div className="popup">
@@ -182,7 +197,11 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
                   </div>
                 </div>
               </div>
-              <table id="example" className="nowrap table-bordered " style={{ width: '100%' }}>
+              <table
+                id="example"
+                className="nowrap table-bordered "
+                style={{ width: '100%' }}
+              >
                 <thead className="tbs">
                   <tr>
                     <th>Sr. No.</th>
@@ -207,13 +226,19 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
                       <td>{item.scheduleTime}</td>
                       <td className="text-center">
                         <div className="btn-group">
-                          <button className="btn icon-btn btn-outline-success btn-sm me-2" >
+                          <button
+                            className="btn icon-btn btn-outline-success btn-sm me-2"
+                            onClick={() => setEditViewVisible(true)}
+                          >
                             <FontAwesomeIcon
                               icon={faPencil}
                               aria-hidden="true"
                             />
                           </button>
-                          <button className="btn icon-btn btn-outline-dark btn-sm me-2">
+                          <button
+                            className="btn icon-btn btn-outline-dark btn-sm me-2"
+                            onClick={() => setTeamViewVisible(true)}
+                          >
                             <FontAwesomeIcon icon={faEye} aria-hidden="true" />
                           </button>
                           <button className="btn icon-btn btn-outline-danger btn-sm">
@@ -241,7 +266,21 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
           </div>
         </div>
       </div>
-      <AddPopup trigger={popupVisible} setTrigger={setPopupVisible} closeParent={closeParentPopup}/>
+      <AddPopup
+        trigger={popupVisible}
+        setTrigger={setPopupVisible}
+        closeParent={closeParentPopup}
+      />
+      <TeamView
+        trigger={teamViewVisible} // Pass the visibility state of TeamViewPopup
+        setTrigger={setTeamViewVisible} // Pass the state update function of TeamViewPopup
+        closeParent={closeParentPopup} // Pass the close function for the parent popup
+      />
+      <EditView
+        trigger={editVisible} // Pass the visibility state of TeamViewPopup
+        setTrigger={setEditViewVisible} // Pass the state update function of TeamViewPopup
+        closeParent={closeParentPopup} // Pass the close function for the parent popup
+      />
     </div>
   ) : null
 }
