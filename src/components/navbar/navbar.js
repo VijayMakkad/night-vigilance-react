@@ -1,6 +1,12 @@
 import './navbar.css'
 import Profile from '../../assets/images/user/01.jpg'
+import { useState } from 'react'
+import ProfilePopup from './ProfilePopup'
 const NaNavbar = () => {
+  const [popupVisible,setPopupVisible] = useState(false)
+  const handleViewProfile = () => {
+    setPopupVisible(true)
+  }
   return (
     <nav>
       <div className="nav-content">
@@ -19,11 +25,13 @@ const NaNavbar = () => {
           <a
             href="#"
             className="search-toggle iq-waves-effect bg-dark text-white"
+            onClick={handleViewProfile}
           >
             <img src={Profile} alt="" className="user-img" />
           </a>
         </div>
       </div>
+      <ProfilePopup trigger={popupVisible} setTrigger={setPopupVisible} />
     </nav>
   )
 }
