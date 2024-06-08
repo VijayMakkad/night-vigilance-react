@@ -1,0 +1,114 @@
+.popup-report{
+    position: fixed;
+    top: 0;
+    left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  z-index: 1000;
+}
+
+.popup-inner-report{
+    background-color: #fff;
+  padding: 0px 15px 15px 15px;
+  width: 100%;
+  margin-top: 30px;
+  max-width: 1100px;
+  height: 100%;
+  max-height: 90vh;
+  /* overflow-y: auto; */
+    /* overflow: hidden; */
+}
+
+.heading-report{
+  display: flex;
+  width: 100%;
+  height: 60px;
+  padding: 0;
+  justify-content: space-between;
+  background-color: #e5eaf4;
+}
+
+.heading-report h4{
+  padding: 15px;
+  font-weight: 400;
+}
+
+.card-report{
+    display: flex;
+  flex-direction: column; 
+    /* width: 100%; */
+  margin-top: 10px;
+  height: 90%; 
+  padding: 10px;
+  background-color: #93ccf1;
+  overflow-y: auto; 
+  overflow-x: hidden;
+}
+
+.card-report h4{
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+/* Card Styles */
+.card-inside {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card-inside:hover {
+  transform: translateY(-5px);
+}
+
+.card-inside-img-top {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-bottom: 1px solid #ddd;
+}
+
+.card-inside-body {
+  padding: 10px;
+  text-align: center;
+}
+
+.card-inside-title {
+  font-size: 1.1rem;
+  margin: 10px 0;
+  color: #444;
+}
+
+/* Report Button */
+.report-btn-container {
+  margin-top: 10px;
+}
+
+.add-report-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-report-btn:hover {
+  background-color: #0056b3;
+}
+
+.buttonss button{
+    margin: 5px;
+}

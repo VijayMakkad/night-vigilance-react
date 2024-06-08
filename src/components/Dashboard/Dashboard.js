@@ -13,6 +13,7 @@ import AddMemberForm from './../AddMemberFrom/AddMemberForm'
 import './dashboard.css'
 import TeamView from './../TeamViewDashboard/TeamViewDashboard'
 import TeamDetails from './../TeamDetails/TeamDetails'
+import ReportPopup from './../ReportPopup/ReportPopup'
 
 
 const data = [
@@ -53,6 +54,7 @@ const Dashboard = () => {
   const [teamPopupVisible, setTeamPopupVisible] = useState(false)
   const [viewMemberVisible, setViewMemberVisible] = useState(false)
   const [selectedMember, setSelectedMember] = useState(null)
+  const [reportPopupVisible, setReportPopupVisible] = useState(false)
 
 
 
@@ -237,6 +239,7 @@ const Dashboard = () => {
                       <button
                         type="button"
                         className="btn icon-btn btn-outline-success btn-sm"
+                        onClick={() => setReportPopupVisible(true)}
                       >
                         <FontAwesomeIcon icon={faPlus} aria-hidden="true" />
                       </button>
@@ -273,6 +276,11 @@ const Dashboard = () => {
         setTrigger={setViewMemberVisible}
         member={selectedMember}
       />
+
+      <ReportPopup
+        trigger={reportPopupVisible}
+        setTrigger={setReportPopupVisible}/>
+        
     </div>
   )
 }
