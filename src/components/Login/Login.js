@@ -5,8 +5,14 @@ import JindalLogo from '../../assets/images/jindal-logo-revised-2@2x.png'
 import Night_vigilane from '../../assets/images/night-vigilance_logo-2.png'
 import Google_Icon from '../../assets/images/google-icon.png'
 import 'bootstrap/dist/css/bootstrap.min.css' // Import Bootstrap CSS
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
+  const navigate=useNavigate();
+  const handleLogin=(e)=>{
+    e.preventDefault()
+    navigate('/dashBoard')
+  }
   return (
     <div className="login-container">
       <header>
@@ -77,6 +83,7 @@ const Login = () => {
                           <a
                             href="index.html"
                             className="btn btn-secondary mt-0 mb-0 form-control"
+                            onClick={handleLogin}
                           >
                             <img
                               src={Google_Icon}

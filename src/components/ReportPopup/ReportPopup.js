@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './report.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faSave } from '@fortawesome/free-solid-svg-icons'
@@ -14,6 +14,7 @@ import Material from '../../assets/images/page-img/material-handling.jpg'
 import Electrical from '../../assets/images/page-img/electrical_hazards.jpg'
 import Fire from '../../assets/images/page-img/fire.jpg'
 import Switch from '@mui/material/Switch'
+import UploadPopup from './UploadPopup'
 
 const data = [
   {
@@ -75,7 +76,7 @@ const data = [
 
 const ProfilePopup = ({ trigger, setTrigger }) => {
   const popupRef = useRef(null)
-
+  const [addReport, setAddReport] = useState(false)
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
@@ -120,7 +121,7 @@ const ProfilePopup = ({ trigger, setTrigger }) => {
                     <Switch />
                     <h5 className="card-inside-title">{item.title}</h5>
                     <div className="report-btn-container">
-                      <button className="add-report-btn">+ Add Report</button>
+                      <button className="add-report-btn" onClick={()=>setAddReport(true)}>+ Add Report</button>
                     </div>
                   </div>
                 </div>
@@ -146,6 +147,7 @@ const ProfilePopup = ({ trigger, setTrigger }) => {
           </div>
         </div>
       </div>
+      <UploadPopup trigger={addReport} setTrigger={setAddReport}/>
     </div>
   ) : (
     ''
