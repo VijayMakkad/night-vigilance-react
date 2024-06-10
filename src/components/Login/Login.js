@@ -1,6 +1,6 @@
 import React from 'react'
 import './Login.css' // Custom CSS file for styling
-import Jpanther from '../../assets/images/j-panther-logo.png'
+import Jpanther from '../../assets/images/google-icon.png'
 import JindalLogo from '../../assets/images/jindal-logo-revised-2@2x.png'
 import Night_vigilane from '../../assets/images/night-vigilance_logo-2.png'
 import Google_Icon from '../../assets/images/google-icon.png'
@@ -27,17 +27,17 @@ const Login = () => {
                   src={Jpanther}
                   className="navbar-brand-img"
                   alt="Jindal Panther Logo"
-                  width="15%"
+                  width="10%"
                 />
               </a>
               <ul className="navbar-nav">
                 <li className="nav-item justify-content-right">
                   <a className="nav-link align-items-right" href="#">
                     <img
-                      src={JindalLogo}
+                      src={Jpanther}
                       className="navbar-brand-img"
                       alt="Jindal Logo"
-                      width="70%"
+                      width="10%"
                     />
                   </a>
                 </li>
