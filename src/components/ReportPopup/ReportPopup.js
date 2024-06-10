@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import './report.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faSave } from '@fortawesome/free-solid-svg-icons'
@@ -14,7 +14,7 @@ import Material from '../../assets/images/page-img/material-handling.jpg'
 import Electrical from '../../assets/images/page-img/electrical_hazards.jpg'
 import Fire from '../../assets/images/page-img/fire.jpg'
 import Switch from '@mui/material/Switch'
-import UploadPopup from './UploadPopup'
+import AddingReport from '../Addingreport/AddingReport'
 
 const data = [
   {
@@ -75,29 +75,11 @@ const data = [
 ]
 
 const ProfilePopup = ({ trigger, setTrigger }) => {
-  const popupRef = useRef(null)
   const [addReport, setAddReport] = useState(false)
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (popupRef.current && !popupRef.current.contains(event.target)) {
-        setTrigger(false)
-      }
-    }
-
-    if (trigger) {
-      document.addEventListener('mousedown', handleClickOutside)
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [trigger, setTrigger])
 
   return trigger ? (
     <div className="popup-report">
-      <div className="popup-inner-report" ref={popupRef}>
+      <div className="popup-inner-report">
         <div className="row">
           <div className="col-lg-12 d-flex heading-report">
             <h4>Report Add/Edit</h4>
@@ -147,7 +129,7 @@ const ProfilePopup = ({ trigger, setTrigger }) => {
           </div>
         </div>
       </div>
-      <UploadPopup trigger={addReport} setTrigger={setAddReport}/>
+      <AddingReport trigger={addReport} setTrigger={setAddReport}/>
     </div>
   ) : (
     ''
