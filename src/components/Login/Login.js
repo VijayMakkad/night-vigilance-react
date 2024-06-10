@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./Login.css"; // Custom CSS file for styling
 import Jpanther from "../../assets/images/j-panther-logo.png";
-import JindalLogo from "../../assets/images/jindal-logo-revised-2@2x.png";
+import JindalLogo from "../../assets/images/google-icon.png";
 import Night_vigilane from "../../assets/images/night-vigilance_logo-2.png";
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 import { useNavigate } from "react-router-dom";
@@ -28,7 +28,7 @@ const Login = () => {
                 href="#"
               >
                 <img
-                  src={Jpanther}
+                  src={JindalLogo}
                   className="navbar-brand-img"
                   alt="Jindal Panther Logo"
                   width="10%"
@@ -38,7 +38,7 @@ const Login = () => {
                 <li className="nav-item justify-content-right">
                   <a className="nav-link align-items-right" href="#">
                     <img
-                      src={Jpanther}
+                      src={JindalLogo}
                       className="navbar-brand-img"
                       alt="Jindal Logo"
                       width="10%"
