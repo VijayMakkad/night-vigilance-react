@@ -103,7 +103,7 @@ const ProfilePopup = ({ trigger, setTrigger }) => {
                     <Switch />
                     <h5 className="card-inside-title">{item.title}</h5>
                     <div className="report-btn-container">
-                      <button className="add-report-btn" onClick={()=>setAddReport(true)}>+ Add Report</button>
+                      <button className="add-report-btn" style={{width:'200px'}} onClick={()=>setAddReport(true)}>+ Add Report</button>
                     </div>
                   </div>
                 </div>

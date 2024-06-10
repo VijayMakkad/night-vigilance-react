@@ -1,147 +1,146 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import './edit.css'
-import { faArrowLeft, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import './edit.css'
 
-function EditPopup(props) {
-  const handleBackButtonClick = () => {
-    // Close the child popup when the "Back" button is pressed
-    props.setTrigger(false)
-  }
+const EditViewPopup = ({ trigger, setTrigger, closeParent, data})   => {
+  const [formData, setFormData] = useState(data || {})
+
   useEffect(() => {
-    const closePopup = (e) => {
-      if (e.key === 'Escape') {
-        props.setTrigger(false)
-      }
-    }
-    window.addEventListener('keydown', closePopup)
-    return () => window.removeEventListener('keydown', closePopup)
-  }, [props.trigger])
+    setFormData(data || {})
+  }, [data])
 
-  return props.trigger ? (
-    <div className="popup-add">
-      <div className="popup-inner-add">
-        <div className="row ">
-          <div className="col-lg-12 d-flex heading-add">
-            <h4>Edit Member</h4>
+  const handleChange = (e) => {
+    const { id, value } = e.target
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }))
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // Handle form submission logic here
+    console.log('Updated Data:', formData)
+    setTrigger(false)
+  }
+
+  return trigger ? (
+    <div className="popup-edit">
+      <div className="popup-inner-edit">
+        <div className="row">
+          <div className="col-lg-12 d-flex justify-content-between align-items-center heading-view">
+            <h4>Edit Report</h4>
             <button
               className="close-btn"
               onClick={() => {
-                props.setTrigger(false)
-                props.closeParent()
+                setTrigger(false)
+                closeParent()
               }}
             >
               <FontAwesomeIcon icon={faTimes} />
             </button>
           </div>
-          <div class="row mt-3">
-            <div class="col justify content-start">
-              <label htmlFor="Employee" className="form-label">
-                Employee Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                className="form-control"
-                placeholder="Emp. Name"
-              />
-            </div>
-            <div class="col justify content-start">
-              <label htmlFor="Employee" className="form-label">
-                Employee Code
-              </label>
-              <input
-                type="text"
-                id="name"
-                className="form-control"
-                placeholder="Emp. Code"
-              />
-            </div>
-            <div class="col justify content-start">
-              <label htmlFor="Department" className="form-label">
-                Department
+        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="row mt-3">
+            <div className="col-md-4 mb-3">
+              <label htmlFor="location" className="form-label">
+                Location
               </label>
               <select id="location" className="form-select">
-                <option>Select Department</option>
-                <option>IT</option>
-                <option>Finance</option>
-                <option>Marketing</option>
+                <option>Select Location</option>
+                <option>Angul</option>
+                <option>Raigarh</option>
+                <option>Patratu</option>
               </select>
             </div>
+            <div className="col justify-content-start">
+              <label htmlFor="teamHead" className="form-label">
+                Team Head
+              </label>
+              <input
+                type="text"
+                id="teamHead"
+                className="form-control"
+                value={formData.teamHead || ''}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="col justify-content-start">
+              <label htmlFor="shiftInCharge" className="form-label">
+                Shift Incharge
+              </label>
+              <input
+                type="text"
+                id="shiftInCharge"
+                className="form-control"
+                value={formData.shiftInCharge || ''}
+                onChange={handleChange}
+              />
+            </div>
           </div>
-          <div class="row mt-3">
-            <div class="col">
-              <label htmlFor="Employee" className="form-label">
-                Designation
+          <div className="row mt-3">
+            <div className="col justify-content-start">
+              <label htmlFor="securityStaff" className="form-label">
+                Security Staff
               </label>
               <input
                 type="text"
-                id="name"
+                id="securityStaff"
                 className="form-control"
-                placeholder="Designation"
+                value={formData.securityStaff || ''}
+                onChange={handleChange}
               />
             </div>
-            <div class="col">
-              <label htmlFor="Employee" className="form-label">
-                Contact No.
+            <div className="col">
+              <label htmlFor="scheduleDate" className="form-label">
+                Schedule Date
               </label>
               <input
-                type="text"
-                id="name"
+                type="date"
+                id="scheduleDate"
                 className="form-control"
-                placeholder="Contact No."
+                value={formData.scheduleDate || ''}
+                onChange={handleChange}
               />
             </div>
-            <div class="col">
-              <label htmlFor="Employee" className="form-label">
-                Reporting Officer
+            <div className="col">
+              <label htmlFor="scheduleTime" className="form-label">
+                Schedule Time
               </label>
               <input
-                type="text"
-                id="name"
+                type="time"
+                id="scheduleTime"
                 className="form-control"
-                placeholder="Reporting Officer"
+                value={formData.scheduleTime || ''}
+                onChange={handleChange}
               />
             </div>
-            <div class="col mb-5">
-              <label htmlFor="Employee" className="form-label">
-                HOD
-              </label>
-              <input
-                type="text"
-                id="name"
-                className="form-control"
-                placeholder="HOD"
-              />
-            </div>
-            <hr />
           </div>
-          <div className="d-flex justify-content-end">
+          <div
+            className="d-flex mt-3 justify-content-end m-2"
+            style={{ borderTop: '1px solid grey' }}
+          >
             <button
-              className="btn btn-primary"
-              style={{ width: '100px', margin: '5px' }}
-              onClick={handleBackButtonClick}
+              className="btn btn-success"
+              type="submit"
+              style={{ width: '100px', marginTop: '10px' }}
             >
-              <FontAwesomeIcon
-                icon={faArrowLeft}
-                style={{ color: '#ffffff' }}
-              />
-              &nbsp; Back
+              Save
             </button>
             <button
-              className="btn btn-danger"
-              style={{ width: '100px', margin: '5px' }}
-              onClick={handleBackButtonClick}
+              className="btn btn-dark"
+              style={{ marginLeft: '30px', width: '100px', marginTop: '10px' }}
+              onClick={()=>setTrigger(false)}
             >
-              Cancel
+              Back
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
-  ) : (
-    ''
-  )
+  ) : null
 }
 
-export default EditPopup
+export default EditViewPopup

@@ -277,9 +277,10 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
         closeParent={closeParentPopup} // Pass the close function for the parent popup
       />
       <EditView
-        trigger={editVisible} // Pass the visibility state of TeamViewPopup
-        setTrigger={setEditViewVisible} // Pass the state update function of TeamViewPopup
-        closeParent={closeParentPopup} // Pass the close function for the parent popup
+        trigger={editVisible}
+        setTrigger={setEditViewVisible}
+        closeParent={closeParentPopup}
+        data={data} // Pass the entire data object
       />
     </div>
   ) : null

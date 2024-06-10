@@ -1,5 +1,5 @@
 import './sidebar.css'
-import Jindal from '../../assets/images/jindal-logo-revised-2@2x.png'
+import Jindal from '../../assets/images/google-icon.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFile, faUsers } from '@fortawesome/free-solid-svg-icons'
 import { RiHome4Line } from 'react-icons/ri'
@@ -8,7 +8,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="logo">
-        <img src={Jindal} alt="Logo" />
+        <img src={Jindal} alt="Logo" style={{width:'70px'}} />
       </div>
       <div className="options">
         <div className="content">
