@@ -1,6 +1,8 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Login from './components/Login/Login'
-import UiComponent from './components/UiComponent/UiComponent'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./components/Login/Login";
+import UiComponent from "./components/UiComponent/UiComponent";
+
+const CLERK_API_KEY = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
 
 function App() {
   return (
@@ -12,7 +14,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

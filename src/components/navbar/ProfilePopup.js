@@ -1,28 +1,29 @@
-import React, { useEffect, useRef } from 'react'
-import './profile.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes, faDoorOpen } from '@fortawesome/free-solid-svg-icons'
+import React, { useEffect, useRef } from "react";
+import "./profile.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes, faDoorOpen } from "@fortawesome/free-solid-svg-icons";
+import { SignOutButton } from "@clerk/clerk-react"; // Import SignOutButton
 
 const ProfilePopup = ({ trigger, setTrigger }) => {
-  const popupRef = useRef(null)
+  const popupRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
-        setTrigger(false)
+        setTrigger(false);
       }
-    }
+    };
 
     if (trigger) {
-      document.addEventListener('mousedown', handleClickOutside)
+      document.addEventListener("mousedown", handleClickOutside);
     } else {
-      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [trigger, setTrigger])
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [trigger, setTrigger]);
 
   return trigger ? (
     <div className="popup-pro">
@@ -35,17 +36,22 @@ const ProfilePopup = ({ trigger, setTrigger }) => {
             </button>
           </div>
           <div className="col-lg-12 d-flex justify-content-end align-items-end">
-            <button className="btn btn-danger mt-5" style={{ width: '130px' }}>
-              <FontAwesomeIcon icon={faDoorOpen} />
-              &nbsp; Sign Out
-            </button>
+            <SignOutButton>
+              <button
+                className="btn btn-danger mt-5"
+                style={{ width: "130px" }}
+              >
+                <FontAwesomeIcon icon={faDoorOpen} />
+                &nbsp; Sign Out
+              </button>
+            </SignOutButton>
           </div>
         </div>
       </div>
     </div>
   ) : (
-    ''
-  )
-}
+    ""
+  );
+};
 
-export default ProfilePopup
+export default ProfilePopup;
