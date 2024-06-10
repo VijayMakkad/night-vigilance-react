@@ -3,7 +3,6 @@ import {
   SignedOut,
   SignInButton,
   UserButton,
-  SignOutButton,
 } from "@clerk/clerk-react";
 
 export default function Clerk() {
@@ -14,7 +13,6 @@ export default function Clerk() {
       </SignedOut>
       <SignedIn>
         <UserButton />
-        <SignOutButton />
       </SignedIn>
     </>
   );
