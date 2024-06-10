@@ -31,17 +31,17 @@ const Login = () => {
                   src={Jpanther}
                   className="navbar-brand-img"
                   alt="Jindal Panther Logo"
-                  width="15%"
+                  width="10%"
                 />
               </a>
               <ul className="navbar-nav">
                 <li className="nav-item justify-content-right">
                   <a className="nav-link align-items-right" href="#">
                     <img
-                      src={JindalLogo}
+                      src={Jpanther}
                       className="navbar-brand-img"
                       alt="Jindal Logo"
-                      width="70%"
+                      width="10%"
                     />
                   </a>
                 </li>
