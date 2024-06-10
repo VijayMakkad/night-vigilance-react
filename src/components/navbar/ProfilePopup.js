@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import "./profile.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes, faDoorOpen } from "@fortawesome/free-solid-svg-icons";
-import { SignOutButton } from "@clerk/clerk-react"; // Import SignOutButton
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { SignedIn, UserButton } from "@clerk/clerk-react";
 
 const ProfilePopup = ({ trigger, setTrigger }) => {
   const popupRef = useRef(null);
@@ -36,15 +36,9 @@ const ProfilePopup = ({ trigger, setTrigger }) => {
             </button>
           </div>
           <div className="col-lg-12 d-flex justify-content-end align-items-end">
-            <SignOutButton>
-              <button
-                className="btn btn-danger mt-5"
-                style={{ width: "130px" }}
-              >
-                <FontAwesomeIcon icon={faDoorOpen} />
-                &nbsp; Sign Out
-              </button>
-            </SignOutButton>
+            <SignedIn>
+              <UserButton className="clerk-user-button" />
+            </SignedIn>
           </div>
         </div>
       </div>

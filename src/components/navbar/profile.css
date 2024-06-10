@@ -1,7 +1,7 @@
-.popup-pro{
-    position: fixed;
-    top: 0;
-    left: 0;
+.popup-pro {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
@@ -11,8 +11,8 @@
   z-index: 1000;
 }
 
-.popup-inner-pro{
-    background-color: #fff;
+.popup-inner-pro {
+  background-color: #fff;
   padding: 0px 15px 15px 15px;
   width: 30%;
   margin-top: 30px;
@@ -22,7 +22,7 @@
   overflow-y: auto;
 }
 
-.heading-pro{
+.heading-pro {
   display: flex;
   width: 100%;
   height: 60px;
@@ -31,8 +31,13 @@
   background-color: #2b6bea;
 }
 
-.heading-pro h4{
+.heading-pro h4 {
   padding: 15px;
   font-weight: 400;
   color: white;
+}
+
+.cl-internal-1j7ahlv {
+  width: 4rem;
+  height: 4rem;
 }
