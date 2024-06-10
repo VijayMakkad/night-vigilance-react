@@ -1,18 +1,22 @@
-import React from 'react'
-import './Login.css' // Custom CSS file for styling
-import Jpanther from '../../assets/images/j-panther-logo.png'
-import JindalLogo from '../../assets/images/jindal-logo-revised-2@2x.png'
-import Night_vigilane from '../../assets/images/night-vigilance_logo-2.png'
-import Google_Icon from '../../assets/images/google-icon.png'
-import 'bootstrap/dist/css/bootstrap.min.css' // Import Bootstrap CSS
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect } from "react";
+import "./Login.css"; // Custom CSS file for styling
+import Jpanther from "../../assets/images/j-panther-logo.png";
+import JindalLogo from "../../assets/images/jindal-logo-revised-2@2x.png";
+import Night_vigilane from "../../assets/images/night-vigilance_logo-2.png";
+import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
+import { useNavigate } from "react-router-dom";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react";
 
 const Login = () => {
-  const navigate=useNavigate();
-  const handleLogin=(e)=>{
-    e.preventDefault()
-    navigate('/dashBoard')
-  }
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Redirect to dashboard if already signed in
+    const handleRedirect = () => {
+      navigate("/dashBoard");
+    };
+  }, [navigate]);
+
   return (
     <div className="login-container">
       <header>
@@ -64,7 +68,7 @@ const Login = () => {
                 <div className="col-xl-6 col-lg-6 p-5 col-md-6 d-flex flex-column">
                   <div
                     className="card card-plain pb-5"
-                    style={{ border: 'none', marginTop: '20%' }}
+                    style={{ border: "none", marginTop: "20%" }}
                   >
                     <div className="col text-center">
                       <img
@@ -78,25 +82,28 @@ const Login = () => {
                       <h6 className="font-weight-bolder text-dark text-center">
                         Click on the below SSO Link
                       </h6>
-                      <form role="form">
-                        <div className="text-center">
-                          <a
-                            href="index.html"
-                            className="btn btn-secondary mt-0 mb-0 form-control"
-                            onClick={handleLogin}
+
+                      <div className="text-center">
+                        <SignedOut>
+                          <SignInButton mode="modal">
+                            <button className="btn btn-dark mt-5 px-5">
+                              Sign In
+                            </button>
+                          </SignInButton>
+                        </SignedOut>
+                        <SignedIn>
+                          <button
+                            className="btn btn-dark mt-5"
+                            onClick={() => navigate("/dashBoard")}
                           >
-                            <img
-                              src={Google_Icon}
-                              width="10%"
-                              alt="Google Icon"
-                            />{' '}
-                            Google
-                          </a>
-                        </div>
-                      </form>
+                            Go to Dashboard
+                          </button>
+                        </SignedIn>
+                      </div>
+
                       <p
                         className="mt-3 text-center"
-                        style={{ fontFamily: 'roboto' }}
+                        style={{ fontFamily: "roboto" }}
                       >
                         © 2024 Jindal Steel & Power | All Rights Reserved.
                       </p>
@@ -121,7 +128,7 @@ const Login = () => {
         </div>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
