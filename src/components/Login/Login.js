@@ -11,12 +11,12 @@ const Login = () => {
   const navigate = useNavigate();
   const { isSignedIn } = useAuth();
 
-  useEffect(() => {
-    // Redirect to dashboard if already signed in
-    if (isSignedIn) {
-      navigate("/dashBoard");
-    }
-  }, [isSignedIn, navigate]);
+  // useEffect(() => {
+  //   // Redirect to dashboard if already signed in
+  //   if (isSignedIn) {
+  //     navigate("/dashBoard");
+  //   }
+  // }, [isSignedIn, navigate]);
 
   return (
     <div className="login-container">
@@ -24,7 +24,10 @@ const Login = () => {
         <div className="container-fluid position-sticky top-0">
           <nav className="navbar navbar-expand-lg blur blur-rounded top-0 z-index-3 shadow position-fixed my-3 py-2 start-0 end-0 mx-4">
             <div className="container-fluid pe-0">
-              <a className="navbar-brand font-weight-bolder ms-lg-0 ms-3" href="#">
+              <a
+                className="navbar-brand font-weight-bolder ms-lg-0 ms-3"
+                href="#"
+              >
                 <img
                   src={JindalLogo}
                   className="navbar-brand-img"
@@ -66,7 +69,7 @@ const Login = () => {
                 <div className="col-xl-6 col-lg-6 p-5 col-md-6 d-flex flex-column">
                   <div
                     className="card card-plain pb-5"
-                    style={{ border: "none", marginTop: "20%" }}
+                    style={{ border: 'none', marginTop: '20%' }}
                   >
                     <div className="col text-center">
                       <img
@@ -91,18 +94,24 @@ const Login = () => {
                         </SignedOut>
                         <SignedIn>
                           {/* Optional: Button to go to the dashboard manually */}
-                          {/* <button
-                            className="btn btn-dark mt-5"
-                            onClick={() => navigate("/dashBoard")}
-                          >
-                            Go to Dashboard
-                          </button> */}
+                            <button
+                              className="btn btn-dark mt-5 mx-2"
+                              onClick={() => navigate('/dashBoard')}
+                            >
+                              Go to Admin Dashboard
+                            </button>
+                            <button
+                              className="btn btn-dark mt-5"
+                              onClick={() => navigate('/dashBoard')}
+                            >
+                              Go to User Dashboard
+                            </button>
                         </SignedIn>
                       </div>
 
                       <p
                         className="mt-3 text-center"
-                        style={{ fontFamily: "roboto" }}
+                        style={{ fontFamily: 'roboto' }}
                       >
                         © 2024 Jindal Steel & Power | All Rights Reserved.
                       </p>
@@ -127,7 +136,7 @@ const Login = () => {
         </div>
       </footer>
     </div>
-  );
+  )
 };
 
 export default Login;

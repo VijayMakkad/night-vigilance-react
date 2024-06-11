@@ -17,7 +17,7 @@ const RSidebar = () => {
           <ul id="iq-sidebar-toggle" className="iq-menu text-white">
             <li>
               <a
-                href="#dashboard"
+                href=""
                 className="iq-waves-effect"
                 aria-expanded="false"
                 onClick={() => navigate("/dashBoard")}
@@ -33,14 +33,6 @@ const RSidebar = () => {
                 <FontAwesomeIcon icon={faFile} />
                 <span style={{ marginLeft: "10px", fontSize: "18px" }}>
                   Report
-                </span>
-              </a>
-            </li>
-            <li>
-              <a className="iq-waves-effect">
-                <FontAwesomeIcon icon={faUsers} />
-                <span style={{ marginLeft: "10px", fontSize: "18px" }}>
-                  Team
                 </span>
               </a>
             </li>
