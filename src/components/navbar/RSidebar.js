@@ -29,12 +29,7 @@ const RSidebar = () => {
               </a>
             </li>
             <li className="active">
-              <a
-                className="iq-waves-effect"
-                onClick={() => {
-                  navigate("/ReportUi");
-                }}
-              >
+              <a className="iq-waves-effect">
                 <FontAwesomeIcon icon={faFile} />
                 <span style={{ marginLeft: "10px", fontSize: "18px" }}>
                   Report
