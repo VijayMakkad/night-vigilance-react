@@ -118,7 +118,7 @@ const Dashboard = () => {
             </div>
             <div className="col">
               <input
-                type="date"
+                type="month"
                 name="current-date"
                 className="form-control"
                 required=""

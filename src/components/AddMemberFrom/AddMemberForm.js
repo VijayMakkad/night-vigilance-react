@@ -102,35 +102,35 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
           </div>
           <div className="col-md-4 mb-3">
             <label htmlFor="teamHead" className="form-label">
-              Team Head
+              Team Head Email
             </label>
             <input
               type="text"
               id="teamHead"
               className="form-control"
-              placeholder="Team Head"
+              placeholder="TeamHead@jindalsteel.com"
             />
           </div>
           <div className="col-md-4 mb-3">
             <label htmlFor="shiftIncharge" className="form-label">
-              Shift Incharge
+              Shift Incharge Email
             </label>
             <input
               type="text"
               id="shiftIncharge"
               className="form-control"
-              placeholder="Shift Incharge"
+              placeholder="ShiftIncharge@jindalsteel.com"
             />
           </div>
           <div className="col-md-4 mb-3">
             <label htmlFor="securityStaff" className="form-label">
-              Security Staff
+              Security Staff Code
             </label>
             <input
               type="text"
               id="securityStaff"
               className="form-control"
-              placeholder="Security Staff"
+              placeholder="Security Staff code"
             />
           </div>
           <div className="col-md-4 mb-3">
