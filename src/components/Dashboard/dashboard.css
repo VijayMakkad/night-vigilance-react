@@ -1,6 +1,7 @@
 /* dashboard.css */
 .dashboard {
     background-color: #ffffff;
+    margin-top: 80px;
     padding: 25px;
     box-sizing: border-box;
     overflow-y: auto;

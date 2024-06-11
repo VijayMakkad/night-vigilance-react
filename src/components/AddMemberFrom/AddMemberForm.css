@@ -18,6 +18,7 @@
   width: 90%;
   max-width: 1200px;
   max-height: 90vh;
+  position: fixed;
   overflow-y: auto;
 }
 

@@ -7,7 +7,6 @@ import Footer from '../Footer/Footer'
 function App() {
   return (
     <>
-      {/* <Login /> */}
       <div className="container-dashboard">
         <Sidebar />
         <div className="main-content">
