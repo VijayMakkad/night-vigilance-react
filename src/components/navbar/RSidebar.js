@@ -12,7 +12,7 @@ const RSidebar = () => {
       <div className="logo">
         <img src={Jindal} alt="Logo" style={{ width: "70px" }} />
       </div>
-      <div className="options">
+      <div className="optionssr">
         <div className="content">
           <ul id="iq-sidebar-toggle" className="iq-menu text-white">
             <li>

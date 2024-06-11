@@ -92,34 +92,26 @@ const Report = () => {
           <div className="row upper-component">
             <div className="col-lg-12 d-flex flex-wrap">
               <div className="col">
-                <select
-                  className="form-select"
-                  aria-label="Default select example"
-                >
-                  <option>Select Location</option>
-                  <option>Raigarh</option>
-                  <option>Patratu</option>
-                  <option>Angul</option>
+                <select class="form-select" aria-label="Default select example">
+                  <option>Select Department</option>
+                  <option>IT</option>
+                  <option>Finance</option>
+                  <option>IT</option>
                 </select>
               </div>
               <div className="col">
-                <select
-                  className="form-select"
-                  aria-label="Default select example"
-                >
-                  <option>Select Team Head</option>
-                  <option>S.K. Sharma</option>
-                  <option>Amit Jashwal</option>
+                <select class="form-select" aria-label="Default select example">
+                  <option>Select Plant Runing Status</option>
+                  <option></option>
+                  <option></option>
                 </select>
               </div>
               <div className="col">
-                <input
-                  type="date"
-                  name="current-date"
-                  className="form-control"
-                  required=""
-                  placeholder="Last Working Date"
-                />
+                <select class="form-select" aria-label="Default select example">
+                  <option>Select Shift Incharge</option>
+                  <option>Amit Kumar</option>
+                  <option>Ramesh Gupta</option>
+                </select>
               </div>
               <div className="col roaster">
                 <button

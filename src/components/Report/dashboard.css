@@ -1,10 +1,22 @@
 /* dashboard.css */
+/* 
+.dashboardr {
+  background-color: #ffffff;
+  padding: 25px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  margin-bottom: 94px
+} */
+
+
 .dashboard {
   background-color: #ffffff;
   padding: 25px;
   box-sizing: border-box;
   overflow-y: auto;
 }
+
+
 
 .upper-component {
   margin-bottom: 12px;

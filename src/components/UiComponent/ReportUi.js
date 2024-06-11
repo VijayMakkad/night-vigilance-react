@@ -11,9 +11,11 @@ export default function ReportUi() {
         <div className="main-content">
           <RNavbar />
           <Report />
-          <Footer />
+          <div className="gg">
+            <Footer />
+          </div>
         </div>
       </div>
     </>
-  );
+  )
 }
