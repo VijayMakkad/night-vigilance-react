@@ -1,191 +1,371 @@
-import React, { useEffect, useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import './Popup.css'
-import { faArrowLeft, faTimes } from '@fortawesome/free-solid-svg-icons'
+import React, { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import './Popup.css';
+import { faArrowLeft, faTimes, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-function Popup(props) {
-  const [currentMember, setCurrentMember] = useState(0)
-  const totalMembers = 6
-
-  const roles = [
+function Popup({ trigger, setTrigger }) {
+  const [selectedRole, setSelectedRole] = useState('Team Head')
+  const [members, setMembers] = useState([{ role: 'Member' }])
+  const [roles, setRoles] = useState([
     'Team Head',
     'Security Staff',
     'Shift In Charge',
-    'Member 1',
-    'Member 2',
-    'Member 3',
-  ]
+    'Members',
+  ])
 
-  const handleBackButtonClick = () => {
-    if (currentMember === 0) {
-      props.setTrigger(false)
-    } else {
-      setCurrentMember(currentMember - 1)
+  const handleRoleChange = (event) => {
+    setSelectedRole(event.target.value)
+    if (event.target.value !== 'Members') {
+      setMembers([{ role: event.target.value }])
     }
   }
 
+  const handleMemberChange = (index, field, value) => {
+    const newMembers = [...members]
+    newMembers[index][field] = value
+    setMembers(newMembers)
+  }
+
+  const addMember = () => {
+    setMembers([...members, { role: 'Member' }])
+  }
+
+  const handleBackButtonClick = () => {
+    setTrigger(false)
+  }
+
   const handleNextButtonClick = () => {
-    if (currentMember < totalMembers - 1) {
-      setCurrentMember(currentMember + 1)
-    } else {
-      // Submit all members
-      props.setTrigger(false)
-    }
+    // Submit all members
+    console.log('Members:', members)
+    setTrigger(false)
+    // Remove the selected role from the roles array
+    setRoles(roles.filter((role) => role !== selectedRole))
   }
 
   useEffect(() => {
     const closePopup = (e) => {
       if (e.key === 'Escape') {
-        props.setTrigger(false)
+        setTrigger(false)
       }
     }
     window.addEventListener('keydown', closePopup)
     return () => window.removeEventListener('keydown', closePopup)
-  }, [props.trigger])
+  }, [setTrigger])
 
-  return props.trigger ? (
+  return trigger ? (
     <div className="popup-add">
       <div className="popup-inner-add">
         <div className="row">
           <div className="col-lg-12 d-flex heading-add">
-            <h4>Add {roles[currentMember]}</h4>
+            <h4>Add {selectedRole}</h4>
             <button
               className="close-btn"
               onClick={() => {
-                props.setTrigger(false)
+                setTrigger(false)
               }}
             >
               <FontAwesomeIcon icon={faTimes} />
             </button>
           </div>
           <div className="row mt-3">
-            <div className="col justify content-start">
-              <label htmlFor={`email-${currentMember}`} className="form-label">
-                {roles[currentMember]} Email
-              </label>
-              <input
-                type="text"
-                id={`email-${currentMember}`}
-                className="form-control"
-                placeholder="Emp@jindalsteel.com"
-              />
-            </div>
-            <div className="col justify content-start">
-              <label htmlFor={`name-${currentMember}`} className="form-label">
-                {roles[currentMember]} Name
-              </label>
-              <input
-                type="text"
-                id={`name-${currentMember}`}
-                className="form-control"
-                placeholder="Emp. Name"
-              />
-            </div>
-            <div className="col justify content-start">
-              <label htmlFor={`code-${currentMember}`} className="form-label">
-                {roles[currentMember]} Code
-              </label>
-              <input
-                type="text"
-                id={`code-${currentMember}`}
-                className="form-control"
-                placeholder="Emp. Code"
-              />
-            </div>
-            <div className="col justify content-start">
-              <label
-                htmlFor={`department-${currentMember}`}
-                className="form-label"
-              >
-                Department
+            <div className="col">
+              <label htmlFor="role-select" className="form-label">
+                Select Role
               </label>
               <select
-                id={`department-${currentMember}`}
+                id="role-select"
                 className="form-select"
+                value={selectedRole}
+                onChange={handleRoleChange}
               >
-                <option>Select Department</option>
-                <option>IT</option>
-                <option>Finance</option>
-                <option>Marketing</option>
+                {roles.map((role, index) => (
+                  <option key={index} value={role}>
+                    {role}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
-          <div className="row mt-3">
-            <div className="col">
-              <label
-                htmlFor={`designation-${currentMember}`}
-                className="form-label"
-              >
-                Designation
-              </label>
-              <input
-                type="text"
-                id={`designation-${currentMember}`}
-                className="form-control"
-                placeholder="Designation"
-              />
-            </div>
-            <div className="col">
-              <label
-                htmlFor={`contact-${currentMember}`}
-                className="form-label"
-              >
-                Contact No.
-              </label>
-              <input
-                type="text"
-                id={`contact-${currentMember}`}
-                className="form-control"
-                placeholder="Contact No."
-              />
-            </div>
-            <div className="col">
-              <label
-                htmlFor={`reporting-${currentMember}`}
-                className="form-label"
-              >
-                Reporting Officer
-              </label>
-              <input
-                type="text"
-                id={`reporting-${currentMember}`}
-                className="form-control"
-                placeholder="Reporting Officer"
-              />
-            </div>
-            <div className="col mb-5">
-              <label htmlFor={`hod-${currentMember}`} className="form-label">
-                HOD
-              </label>
-              <input
-                type="text"
-                id={`hod-${currentMember}`}
-                className="form-control"
-                placeholder="HOD"
-              />
-            </div>
-            <hr />
-          </div>
+          {selectedRole === 'Members' ? (
+            <>
+              {members.map((member, index) => (
+                <div key={index}>
+                  <div className="row mt-3">
+                    {member.role !== 'Security Staff' && (
+                      <div className="col">
+                        <label
+                          htmlFor={`email-${index}`}
+                          className="form-label"
+                        >
+                          Member Email
+                        </label>
+                        <input
+                          type="text"
+                          id={`email-${index}`}
+                          className="form-control"
+                          placeholder="Emp@jindalsteel.com"
+                          value={member.email || ''}
+                          onChange={(e) =>
+                            handleMemberChange(index, 'email', e.target.value)
+                          }
+                        />
+                      </div>
+                    )}
+                    <div className="col">
+                      <label htmlFor={`name-${index}`} className="form-label">
+                        Member Name
+                      </label>
+                      <input
+                        type="text"
+                        id={`name-${index}`}
+                        className="form-control"
+                        placeholder="Emp. Name"
+                        value={member.name || ''}
+                        onChange={(e) =>
+                          handleMemberChange(index, 'name', e.target.value)
+                        }
+                      />
+                    </div>
+                    <div className="col">
+                      <label htmlFor={`code-${index}`} className="form-label">
+                        Member Code
+                      </label>
+                      <input
+                        type="text"
+                        id={`code-${index}`}
+                        className="form-control"
+                        placeholder="Emp. Code"
+                        value={member.code || ''}
+                        onChange={(e) =>
+                          handleMemberChange(index, 'code', e.target.value)
+                        }
+                      />
+                    </div>
+                    <div className="col">
+                      <label
+                        htmlFor={`department-${index}`}
+                        className="form-label"
+                      >
+                        Department
+                      </label>
+                      <select
+                        id={`department-${index}`}
+                        className="form-select"
+                        value={member.department || ''}
+                        onChange={(e) =>
+                          handleMemberChange(
+                            index,
+                            'department',
+                            e.target.value
+                          )
+                        }
+                      >
+                        <option>Select Department</option>
+                        <option>IT</option>
+                        <option>Finance</option>
+                        <option>Marketing</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="row mt-3">
+                    <div className="col">
+                      <label
+                        htmlFor={`designation-${index}`}
+                        className="form-label"
+                      >
+                        Designation
+                      </label>
+                      <input
+                        type="text"
+                        id={`designation-${index}`}
+                        className="form-control"
+                        placeholder="Designation"
+                        value={member.designation || ''}
+                        onChange={(e) =>
+                          handleMemberChange(
+                            index,
+                            'designation',
+                            e.target.value
+                          )
+                        }
+                      />  
+                    </div>
+                    <div className="col">
+                      <label
+                        htmlFor={`contact-${index}`}
+                        className="form-label"
+                      >
+                        Contact No.
+                      </label>
+                      <input
+                        type="text"
+                        id={`contact-${index}`}
+                        className="form-control"
+                        placeholder="Contact No."
+                        value={member.contact || ''}
+                        onChange={(e) =>
+                          handleMemberChange(index, 'contact', e.target.value)
+                        }
+                      />
+                    </div>
+                    <div className="col">
+                      <label
+                        htmlFor={`reporting-${index}`}
+                        className="form-label"
+                      >
+                        Reporting Officer
+                      </label>
+                      <input
+                        type="text"
+                        id={`reporting-${index}`}
+                        className="form-control"
+                        placeholder="Reporting Officer"
+                        value={member.reporting || ''}
+                        onChange={(e) =>
+                          handleMemberChange(index, 'reporting', e.target.value)
+                        }
+                      />
+                    </div>
+                    <div className="col mb-5">
+                      <label htmlFor={`hod-${index}`} className="form-label">
+                        HOD
+                      </label>
+                      <input
+                        type="text"
+                        id={`hod-${index}`}
+                        className="form-control"
+                        placeholder="HOD"
+                        value={member.hod || ''}
+                        onChange={(e) =>
+                          handleMemberChange(index, 'hod', e.target.value)
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+              <div className="d-flex justify-content-start">
+                <button className="btn btn-primary" onClick={addMember}>
+                  <FontAwesomeIcon icon={faPlus} /> Add Member
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="row mt-3">
+                {selectedRole !== 'Security Staff' && (
+                  <div className="col">
+                    <label htmlFor="email" className="form-label">
+                      Email
+                    </label>
+                    <input
+                      type="text"
+                      id="email"
+                      className="form-control"
+                      placeholder="Emp@jindalsteel.com"
+                    />
+                  </div>
+                )}
+                <div className="col">
+                  <label htmlFor="code" className="form-label">
+                    Code
+                  </label>
+                  <input
+                    type="text"
+                    id="code"
+                    className="form-control"
+                    placeholder="Emp. Code"
+                  />
+                </div>
+                <div className="col">
+                  <label htmlFor="name" className="form-label">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    className="form-control"
+                    placeholder="Emp. Name"
+                  />
+                </div>
+                <div className="col">
+                  <label htmlFor="department" className="form-label">
+                    Department
+                  </label>
+                  <select id="department" className="form-select">
+                    <option>Select Department</option>
+                    <option>IT</option>
+                    <option>Finance</option>
+                    <option>Marketing</option>
+                  </select>
+                </div>
+              </div>
+              <div className="row mt-3">
+                <div className="col">
+                  <label htmlFor="designation" className="form-label">
+                    Designation
+                  </label>
+                  <input
+                    type="text"
+                    id="designation"
+                    className="form-control"
+                    placeholder="Designation"
+                  />
+                </div>
+                <div className="col">
+                  <label htmlFor="contact" className="form-label">
+                    Contact No.
+                  </label>
+                  <input
+                    type="text"
+                    id="contact"
+                    className="form-control"
+                    placeholder="Contact No."
+                  />
+                </div>
+                <div className="col">
+                  <label htmlFor="reporting" className="form-label">
+                    Reporting Officer
+                  </label>
+                  <input
+                    type="text"
+                    id="reporting"
+                    className="form-control"
+                    placeholder="Reporting Officer"
+                  />
+                </div>
+                <div className="col mb-5">
+                  <label htmlFor="hod" className="form-label">
+                    HOD
+                  </label>
+                  <input
+                    type="text"
+                    id="hod"
+                    className="form-control"
+                    placeholder="HOD"
+                  />
+                </div>
+              </div>
+            </>
+          )}
           <div className="d-flex justify-content-end">
-            {currentMember > 0 && (
-              <button
-                className="btn btn-dark"
-                style={{ width: '100px', margin: '5px' }}
-                onClick={handleBackButtonClick}
-              >
-                <FontAwesomeIcon
-                  icon={faArrowLeft}
-                  style={{ color: '#ffffff' }}
-                />
-                &nbsp; Back
-              </button>
-            )}
+            <button
+              className="btn btn-dark"
+              style={{ width: '100px', margin: '5px' }}
+              onClick={handleBackButtonClick}
+            >
+              <FontAwesomeIcon
+                icon={faArrowLeft}
+                style={{ color: '#ffffff' }}
+              />
+              &nbsp; Back
+            </button>
             <button
               className="btn btn-success"
               style={{ width: '100px', margin: '5px' }}
               onClick={handleNextButtonClick}
             >
-              {currentMember < totalMembers - 1 ? 'Next' : 'Submit'}
+              Submit
             </button>
           </div>
         </div>
