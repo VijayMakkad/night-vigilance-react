@@ -66,15 +66,26 @@ function AddReport(props) {
         </div>
         <div className="row mt-3">
           <div className="col justify-content-start">
-            <label htmlFor="location" className="form-label">
-              Location
+            <label htmlFor="department" className="form-label">
+              Department
             </label>
-            <select id="location" className="form-select">
-              <option>Select Location</option>
-              <option>Angul</option>
-              <option>Raigarh</option>
-              <option>Patratu</option>
+            <select id="department" className="form-select">
+              <option>Select Department</option>
+              <option>IT</option>
+              <option>Finance</option>
+              <option>Marketing</option>
             </select>
+          </div>
+          <div className="col">
+            <label htmlFor="email" className="form-label">
+              Email
+            </label>
+            <input
+              type="text"
+              id="email"
+              className="form-control"
+              placeholder="Email"
+            />
           </div>
           <div className="col justify-content-start">
             <label htmlFor="employeeName" className="form-label">
@@ -98,6 +109,8 @@ function AddReport(props) {
               placeholder="Emp.ID"
             />
           </div>
+          </div>
+        <div className="row mt-3">
           <div className="col">
             <label htmlFor="designation" className="form-label">
               Designation
@@ -108,20 +121,7 @@ function AddReport(props) {
               className="form-control"
               placeholder="Designation"
             />
-          </div>
         </div>
-        <div className="row mt-3">
-          <div className="col justify-content-start">
-            <label htmlFor="department" className="form-label">
-              Department
-            </label>
-            <select id="department" className="form-select">
-              <option>Select Department</option>
-              <option>IT</option>
-              <option>Finance</option>
-              <option>Marketing</option>
-            </select>
-          </div>
           <div className="col">
             <label htmlFor="contactNo" className="form-label">
               Contact No.
@@ -131,17 +131,6 @@ function AddReport(props) {
               id="contactNo"
               className="form-control"
               placeholder="Contact No."
-            />
-          </div>
-          <div className="col">
-            <label htmlFor="email" className="form-label">
-              Email
-            </label>
-            <input
-              type="text"
-              id="email"
-              className="form-control"
-              placeholder="Email"
             />
           </div>
           <div className="col">
