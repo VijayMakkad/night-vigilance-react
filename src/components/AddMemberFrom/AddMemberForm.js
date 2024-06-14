@@ -122,7 +122,7 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
               placeholder="ShiftIncharge@jindalsteel.com"
             />
           </div>
-          <div className="col-md-4 mb-3">
+          <div className="col-md mb-3">
             <label htmlFor="securityStaff" className="form-label">
               Security Staff Code
             </label>
@@ -133,18 +133,18 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
               placeholder="Security Staff code"
             />
           </div>
-          <div className="col-md-4 mb-3">
+          <div className="col-md mb-3">
             <label htmlFor="scheduleDate" className="form-label">
               Schedule Date
             </label>
             <input type="date" id="scheduleDate" className="form-control" />
           </div>
-          <div className="col-md-4 mb-3">
+          {/* <div className="col-md-4 mb-3">
             <label htmlFor="scheduleTime" className="form-label">
               Schedule Time
             </label>
             <input type="time" id="scheduleTime" className="form-control" />
-          </div>
+          </div> */}
         </div>
         <div className="row">
           <div className="col-12 mb-3 btun">

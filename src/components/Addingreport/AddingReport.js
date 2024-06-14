@@ -58,7 +58,6 @@ function AddReport(props) {
               className="close-btn"
               onClick={() => {
                 props.setTrigger(false)
-                // props.closeParent()
               }}
             >
               <FontAwesomeIcon icon={faTimes} />
@@ -156,53 +155,68 @@ function AddReport(props) {
               placeholder="Reporting Officer"
             />
           </div>
+          <div className="col">
+            <label htmlFor="scheduleTime" className="form-label">
+              Schedule Time
+            </label>
+            <input type="time" id="scheduleTime" className="form-control" />
+          </div>
         </div>
         <div className="row mt-3" style={{ backgroundColor: '#93ccf1' }}>
           <h3 className="text-center text-white pb-3">Upload the Photograph</h3>
           {imageCards.map((card) => (
-            <div className="col-sm-4 p-0" key={card.id}>
-              <div className="card" style={{ height: '250px' }}>
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-sm-12 imgUp">
-                      <div
-                        className="imagePreview"
+            <div className="col-3 p-2" key={card.id}>
+              <div
+                className="card p-2"
+                style={{ height: '250px', width: '250px', margin: '10px auto' }}
+              >
+                <div className="card-body p-0 d-flex flex-column">
+                  <div
+                    className="imagePreview"
+                    style={{
+                      height: '100%',
+                      width: '100%',
+                      backgroundImage: `url(${card.image})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      padding: '10px auto',
+                      flex: 1,
+                    }}
+                  ></div>
+                  <div className="d-flex justify-content-between mt-2 p-2">
+                    <label
+                      className="btn btn-primary btn-sm"
+                      style={{ flex: 1, marginRight: '5px' }}
+                    >
+                      Upload
+                      <input
+                        type="file"
+                        className="uploadFile img"
                         style={{
-                          backgroundImage: `url(${card.image})`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
+                          width: '0px',
+                          height: '0px',
+                          overflow: 'hidden',
                         }}
-                      ></div>
-                      <label className="btn btn-primary col-sm-5 " style={{marginRight:'45px'}}>
-                        Upload
-                        <input
-                          type="file"
-                          className="uploadFile img"
-                          style={{
-                            width: '0px',
-                            height: '0px',
-                            overflow: 'hidden',
-                          }}
-                          onChange={(e) => handleImageUpload(e, card.id)}
-                        />
-                      </label>
-                      <button
-                        className="btn btn-danger col-sm-5"
-                        onClick={() => handleRemoveImageCard(card.id)}
-                      >
-                        <FontAwesomeIcon icon={faTrash} /> Remove
-                      </button>
-                    </div>
+                        onChange={(e) => handleImageUpload(e, card.id)}
+                      />
+                    </label>
+                    <button
+                      className="btn btn-danger btn-sm"
+                      onClick={() => handleRemoveImageCard(card.id)}
+                      style={{ flex: 1 }}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           ))}
-          <div className="col-sm-4 d-flex align-items-center justify-content-center">
+          <div className="col-3 d-flex align-items-center justify-content-center">
             <button
               className="btn btn-primary"
               onClick={handleAddImageCard}
-              style={{ height: '40px', margin:'30px' }}
+              style={{ height: '40px', margin: '30px' }}
             >
               <FontAwesomeIcon icon={faPlus} />
             </button>

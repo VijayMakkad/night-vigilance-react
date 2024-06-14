@@ -145,7 +145,7 @@ const Dashboard = () => {
                 onClick={() => setPopupVisible(true)}
               >
                 <FontAwesomeIcon icon={faPlus} style={{ color: '#ffffff' }} />
-                &nbsp; Add Members
+                &nbsp; Add Roaster
               </button>
             </div>
           </div>
