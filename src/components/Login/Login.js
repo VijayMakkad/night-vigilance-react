@@ -6,6 +6,7 @@ import Night_vigilane from "../../assets/images/night-vigilance_logo-2.png";
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 import { useNavigate } from "react-router-dom";
 import { SignedIn, SignedOut, SignInButton, useAuth } from "@clerk/clerk-react";
+import UserDashboard from "../../User Dashboard/UserDashBoard";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -69,7 +70,7 @@ const Login = () => {
                 <div className="col-xl-6 col-lg-6 p-5 col-md-6 d-flex flex-column">
                   <div
                     className="card card-plain pb-5"
-                    style={{ border: 'none', marginTop: '20%' }}
+                    style={{ border: "none", marginTop: "20%" }}
                   >
                     <div className="col text-center">
                       <img
@@ -94,24 +95,24 @@ const Login = () => {
                         </SignedOut>
                         <SignedIn>
                           {/* Optional: Button to go to the dashboard manually */}
-                            <button
-                              className="btn btn-dark mt-5 mx-2"
-                              onClick={() => navigate('/dashBoard')}
-                            >
-                              Go to Admin Dashboard
-                            </button>
-                            <button
-                              className="btn btn-dark mt-5"
-                              onClick={() => navigate('/dashBoard')}
-                            >
-                              Go to User Dashboard
-                            </button>
+                          <button
+                            className="btn btn-dark mt-5 mx-2"
+                            onClick={() => navigate("/dashBoard")}
+                          >
+                            Go to Admin Dashboard
+                          </button>
+                          <button
+                            className="btn btn-dark mt-5"
+                            onClick={() => navigate("/UserDashboard")}
+                          >
+                            Go to User Dashboard
+                          </button>
                         </SignedIn>
                       </div>
 
                       <p
                         className="mt-3 text-center"
-                        style={{ fontFamily: 'roboto' }}
+                        style={{ fontFamily: "roboto" }}
                       >
                         © 2024 Jindal Steel & Power | All Rights Reserved.
                       </p>
@@ -136,7 +137,7 @@ const Login = () => {
         </div>
       </footer>
     </div>
-  )
+  );
 };
 
 export default Login;

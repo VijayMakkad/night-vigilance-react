@@ -12,11 +12,11 @@ import {
   faSortDown,
 } from "@fortawesome/free-solid-svg-icons";
 import "bootstrap/dist/css/bootstrap.min.css";
-import AddMemberForm from "../AddMemberFrom/AddMemberForm";
+import AddMemberForm from "../components/AddMemberFrom/AddMemberForm";
 import "./dashboard.css";
-import TeamView from "../TeamViewDashboard/TeamViewDashboard";
-import TeamDetails from "../TeamDetails/TeamDetails";
-import ReportPopup from "../ReportPopup/ReportPopup";
+import TeamView from "../components/TeamViewDashboard/TeamViewDashboard";
+import TeamDetails from "../components/TeamDetails/TeamDetails";
+// import ReportPopup from "../ReportPopup/ReportPopup";
 
 const data = [
   {
@@ -48,7 +48,7 @@ const data = [
   },
 ];
 
-const Report = () => {
+const UserReport = () => {
   const [entriesPerPage, setEntriesPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState("");
   const [popupVisible, setPopupVisible] = useState(false);
@@ -274,13 +274,13 @@ const Report = () => {
           member={selectedMember}
         />
 
-        <ReportPopup
+        {/* <ReportPopup
           trigger={reportPopupVisible}
           setTrigger={setReportPopupVisible}
-        />
+        /> */}
       </div>
     </>
   );
 };
 
-export default Report;
+export default UserReport;
