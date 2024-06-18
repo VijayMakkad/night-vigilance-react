@@ -123,7 +123,7 @@ const UserReport = () => {
     <>
       <div className="dashboard">
         <div className="container">
-          {/* <div className="row upper-component">
+          <div className="row upper-component">
             <div className="col-lg-12 d-flex flex-wrap">
               <div className="col">
                 <select
@@ -169,7 +169,7 @@ const UserReport = () => {
                 </button>
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
         <div className="card">
           <div className="table-responsive">
@@ -240,12 +240,12 @@ const UserReport = () => {
                         >
                           <FontAwesomeIcon icon={faPlus} aria-hidden="true" />
                         </button>
-                        {/* <button
+                        <button
                           type="button"
                           className="btn icon-btn btn-outline-danger btn-sm"
                         >
                           <FontAwesomeIcon icon={faTrash} aria-hidden="true" />
-                        </button> */}
+                        </button>
                       </div>
                     </td>
                   </tr>

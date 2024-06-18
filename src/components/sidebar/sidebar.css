@@ -30,9 +30,18 @@
   background-color: #0060b6;
 }
 
+.optionsus {
+  width: 100%;
+  height: 88.7vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #0060b6;
+}
+
 .optionssr {
   width: 100%;
-  height: 89.7vh;
+  height: 95.7vh;
   display: flex;
   flex-direction: column;
   align-items: center;
