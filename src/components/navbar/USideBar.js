@@ -11,15 +11,16 @@ const USidebar = () => {
   return (
     <div className="sidebar">
       <div className="logo">
-        <img src={Jindal} alt="Logo" style={{ width: "70px" }} />
+        <img src={Jindal} alt="Logo" style={{ width: '70px' }} />
       </div>
       <div className="optionsus">
         <div className="content">
           <ul id="iq-sidebar-toggle" className="iq-menu text-white">
             <li className="active">
               <a className="iq-waves-effect">
-                <FontAwesomeIcon icon={faFile} />
-                <span style={{ marginLeft: "10px", fontSize: "18px" }}>
+                <RiHome4Line />
+
+                <span style={{ marginLeft: '10px', fontSize: '18px' }}>
                   User Dashboard
                 </span>
               </a>
@@ -29,10 +30,10 @@ const USidebar = () => {
                 href=""
                 className="iq-waves-effect"
                 aria-expanded="false"
-                onClick={() => navigate("/UserReportUI")}
+                onClick={() => navigate('/UserReportUI')}
               >
-                <RiHome4Line />
-                <span style={{ marginLeft: "10px", fontSize: "18px" }}>
+                <FontAwesomeIcon icon={faFile} />
+                <span style={{ marginLeft: '10px', fontSize: '18px' }}>
                   Report
                 </span>
               </a>
@@ -41,7 +42,7 @@ const USidebar = () => {
         </div>
       </div>
     </div>
-  );
+  )
 };
 
 export default USidebar;

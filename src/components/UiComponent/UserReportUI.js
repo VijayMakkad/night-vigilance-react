@@ -1,13 +1,13 @@
 import Footer from '../Footer/Footer'
 import UserReport from '../../User Dashboard/UserReport'
-import USidebar from '../navbar/USideBar'
+import RUSidebar from '../navbar/RUSidebar'
 import RNavbar from '../navbar/RNavbar'
 
 export default function UserReportUi() {
   return (
     <>
       <div className="container-dashboard">
-        <USidebar />
+        <RUSidebar />
         <div className="main-content">
           <RNavbar />
           <UserReport />
