@@ -12,44 +12,28 @@ import {
 import AddPopup from './../Popup/AddPopup'
 import TeamView from './../TeamViewPopup/TeamViewPopup'
 import EditView from './../EditViewPopup/EditViewPopup'
-
-const data = [
-  {
-    id: 1,
-    location: 'Angul',
-    teamHead: 'Arjun Patil',
-    shiftInCharge: 'Amit Singh',
-    securityStaff: 'Suraj Das',
-    scheduleDate: '12-04-2023',
-    scheduleTime: '18:30 pm',
-  },
-  {
-    id: 2,
-    location: 'Raigarh',
-    teamHead: 'Arjun Patil',
-    shiftInCharge: 'Amit Singh',
-    securityStaff: 'Suraj Das',
-    scheduleDate: '12-04-2023',
-    scheduleTime: '18:30 pm',
-  },
-  {
-    id: 3,
-    location: 'Patratu',
-    teamHead: 'Arjun Patil',
-    shiftInCharge: 'Amit Singh',
-    securityStaff: 'Suraj Das',
-    scheduleDate: '12-04-2023',
-    scheduleTime: '18:30 pm',
-  },
-  // Add more data if needed
-]
+import axios from 'axios'
 
 const AddMemberForm = ({ trigger, setTrigger }) => {
+  const [data, setData] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const [entries, setEntries] = useState(10)
   const [popupVisible, setPopupVisible] = useState(false)
   const [teamViewVisible, setTeamViewVisible] = useState(false)
   const [editVisible, setEditViewVisible] = useState(false)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/api/saveRoaster')
+        setData(response.data)
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
 
   const filteredData = data.filter((item) => {
     return (
@@ -74,8 +58,7 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
     }
     window.addEventListener('keydown', closePopup)
     return () => window.removeEventListener('keydown', closePopup)
-  }, [])
-
+  }, [setTrigger])
 
   return trigger ? (
     <div className="popup">
@@ -100,59 +83,19 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
               <option>Patratu</option>
             </select>
           </div>
-          <div className="col-md-4 mb-3">
-            <label htmlFor="teamHead" className="form-label">
-              Team Head Email
-            </label>
-            <input
-              type="text"
-              id="teamHead"
-              className="form-control"
-              placeholder="TeamHead@jindalsteel.com"
-            />
-          </div>
-          <div className="col-md-4 mb-3">
-            <label htmlFor="shiftIncharge" className="form-label">
-              Shift Incharge Email
-            </label>
-            <input
-              type="text"
-              id="shiftIncharge"
-              className="form-control"
-              placeholder="ShiftIncharge@jindalsteel.com"
-            />
-          </div>
-          <div className="col-md mb-3">
-            <label htmlFor="securityStaff" className="form-label">
-              Security Staff Code
-            </label>
-            <input
-              type="text"
-              id="securityStaff"
-              className="form-control"
-              placeholder="Security Staff code"
-            />
-          </div>
           <div className="col-md mb-3">
             <label htmlFor="scheduleDate" className="form-label">
               Schedule Date
             </label>
             <input type="date" id="scheduleDate" className="form-control" />
           </div>
-          {/* <div className="col-md-4 mb-3">
-            <label htmlFor="scheduleTime" className="form-label">
-              Schedule Time
-            </label>
-            <input type="time" id="scheduleTime" className="form-control" />
-          </div> */}
         </div>
         <div className="row">
           <div className="col-12 mb-3 btun">
             <button
-              className="btn btn-success "
+              className="btn btn-success"
               onClick={() => setPopupVisible(true)}
             >
-              {' '}
               <FontAwesomeIcon icon={faPlus} /> Add Members
             </button>
           </div>
@@ -199,7 +142,7 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
               </div>
               <table
                 id="example"
-                className="nowrap table-bordered "
+                className="nowrap table-bordered"
                 style={{ width: '100%' }}
               >
                 <thead className="tbs">
@@ -258,9 +201,6 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
                   Showing {Math.min(entries, filteredData.length)} of{' '}
                   {filteredData.length} entries
                 </div>
-                <div>
-                  {/* Pagination controls can be added here if needed */}
-                </div>
               </div>
             </div>
           </div>
@@ -272,15 +212,15 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
         closeParent={closeParentPopup}
       />
       <TeamView
-        trigger={teamViewVisible} // Pass the visibility state of TeamViewPopup
-        setTrigger={setTeamViewVisible} // Pass the state update function of TeamViewPopup
-        closeParent={closeParentPopup} // Pass the close function for the parent popup
+        trigger={teamViewVisible}
+        setTrigger={setTeamViewVisible}
+        closeParent={closeParentPopup}
       />
       <EditView
         trigger={editVisible}
         setTrigger={setEditViewVisible}
         closeParent={closeParentPopup}
-        data={data} // Pass the entire data object
+        data={data}
       />
     </div>
   ) : null
