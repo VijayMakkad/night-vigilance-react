@@ -227,3 +227,4 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
 }
 
 export default AddMemberForm
+  

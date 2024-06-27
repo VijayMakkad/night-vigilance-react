@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faTimes, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { Tabs, Tab, Box } from '@mui/material';
-import './Popup.css';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft, faTimes, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { Tabs, Tab, Box } from '@mui/material'
+import './Popup.css'
 
-const Popup = ({ trigger, setTrigger }) => {
+function Popup({ trigger, setTrigger }) {
   const [selectedTab, setSelectedTab] = useState(0)
   const [members, setMembers] = useState([{ role: 'Member' }])
   const [roles, setRoles] = useState([
@@ -14,11 +13,6 @@ const Popup = ({ trigger, setTrigger }) => {
     'Shift In Charge',
     'Members',
   ])
-  const [roasterDetails, setRoasterDetails] = useState({
-    createdBy: '',
-    location: '',
-    dateTime: new Date().toISOString(), // Default to current date-time
-  })
 
   const handleTabChange = (event, newValue) => {
     setSelectedTab(newValue)
@@ -34,28 +28,16 @@ const Popup = ({ trigger, setTrigger }) => {
     setMembers([...members, { role: 'Member' }])
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    try {
-      const roasterDTO = {
-        ...roasterDetails,
-        members: members.map((member) => ({
-          ...member,
-          isTeamHead: roles[selectedTab] === 'Team Head',
-          isShiftIncharge: roles[selectedTab] === 'Shift In Charge',
-          isSecStaff: roles[selectedTab] === 'Security Staff',
-        })),
-      }
-      const response = await axios.post('/api/saveRoaster', roasterDTO)
-      console.log('Submitted successfully:', response.data)
-      setTrigger(false)
-    } catch (error) {
-      console.error('Error submitting data:', error)
-    }
-  }
-
   const handleBackButtonClick = () => {
     setTrigger(false)
+  }
+
+  const handleNextButtonClick = () => {
+    // Submit all members
+    console.log('Members:', members)
+    setTrigger(false)
+    // Remove the selected role from the roles array
+    setRoles(roles.filter((_, index) => index !== selectedTab))
   }
 
   useEffect(() => {
@@ -83,13 +65,6 @@ const Popup = ({ trigger, setTrigger }) => {
     return placeholders[field]
   }
 
-  const handleRoasterDetailChange = (field, value) => {
-    setRoasterDetails({
-      ...roasterDetails,
-      [field]: value,
-    })
-  }
-
   return trigger ? (
     <div className="popup-add">
       <div className="popup-inner-add">
@@ -111,52 +86,6 @@ const Popup = ({ trigger, setTrigger }) => {
               ))}
             </Tabs>
           </Box>
-          <div className="roaster-details mt-3">
-            <div className="row">
-              <div className="col">
-                <label htmlFor="createdBy" className="form-label">
-                  Created By
-                </label>
-                <input
-                  type="text"
-                  id="createdBy"
-                  className="form-control"
-                  value={roasterDetails.createdBy}
-                  onChange={(e) =>
-                    handleRoasterDetailChange('createdBy', e.target.value)
-                  }
-                />
-              </div>
-              <div className="col">
-                <label htmlFor="location" className="form-label">
-                  Location
-                </label>
-                <input
-                  type="text"
-                  id="location"
-                  className="form-control"
-                  value={roasterDetails.location}
-                  onChange={(e) =>
-                    handleRoasterDetailChange('location', e.target.value)
-                  }
-                />
-              </div>
-              <div className="col">
-                <label htmlFor="dateTime" className="form-label">
-                  Date & Time
-                </label>
-                <input
-                  type="datetime-local"
-                  id="dateTime"
-                  className="form-control"
-                  value={roasterDetails.dateTime}
-                  onChange={(e) =>
-                    handleRoasterDetailChange('dateTime', e.target.value)
-                  }
-                />
-              </div>
-            </div>
-          </div>
           {roles[selectedTab] === 'Members' ? (
             <>
               {members.map((member, index) => (
@@ -330,7 +259,7 @@ const Popup = ({ trigger, setTrigger }) => {
                 <button
                   className="btn btn-success"
                   style={{ width: '100px', margin: '5px' }}
-                  onClick={handleSubmit}
+                  onClick={handleNextButtonClick}
                 >
                   Submit
                 </button>
@@ -431,26 +360,6 @@ const Popup = ({ trigger, setTrigger }) => {
                     placeholder={getPlaceholder('hod')}
                   />
                 </div>
-              </div>
-              <div className="d-flex justify-content-end mt-3">
-                <button
-                  className="btn btn-dark"
-                  style={{ width: '100px', margin: '5px' }}
-                  onClick={handleBackButtonClick}
-                >
-                  <FontAwesomeIcon
-                    icon={faArrowLeft}
-                    style={{ color: '#ffffff' }}
-                  />
-                  &nbsp; Back
-                </button>
-                <button
-                  className="btn btn-success"
-                  style={{ width: '100px', margin: '5px' }}
-                  onClick={handleSubmit}
-                >
-                  Submit
-                </button>
               </div>
             </>
           )}
