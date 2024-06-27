@@ -92,13 +92,6 @@ const UserDashboard = () => {
           <div className="col-lg-12 d-flex flex-wrap">
             <div className="col roaster">
               <h4 className="card-title text-white">User Dashboard</h4>
-              <button
-                className="btn btn-success"
-                onClick={() => setPopupVisible(true)}
-              >
-                <FontAwesomeIcon icon={faPlus} style={{ color: "#ffffff" }} />
-                &nbsp; Add Members
-              </button>
             </div>
           </div>
         </div>
