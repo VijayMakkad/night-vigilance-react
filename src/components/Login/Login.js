@@ -1,23 +1,87 @@
-import React, { useEffect } from "react";
-import "./Login.css"; // Custom CSS file for styling
-import Jpanther from "../../assets/images/j-panther-logo.png";
-import JindalLogo from "../../assets/images/google-icon.png";
-import Night_vigilane from "../../assets/images/night-vigilance_logo-2.png";
-import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
-import { useNavigate } from "react-router-dom";
-import { SignedIn, SignedOut, SignInButton, useAuth } from "@clerk/clerk-react";
-import UserDashboard from "../../User Dashboard/UserDashBoard";
+import React, { useState } from 'react';
+import './Login.css'; // Custom CSS file for styling
+import JindalLogo from '../../assets/images/google-icon.png';
+import Night_vigilane from '../../assets/images/night-vigilance_logo-2.png';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import { useNavigate } from 'react-router-dom';
+import { SignedIn, SignedOut, useAuth } from '@clerk/clerk-react';
+import UserDashboard from '../../User Dashboard/UserDashBoard';
 
 const Login = () => {
-  const navigate = useNavigate();
-  const { isSignedIn } = useAuth();
+  const navigate = useNavigate()
+  const { isSignedIn } = useAuth()
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
-  // useEffect(() => {
-  //   // Redirect to dashboard if already signed in
-  //   if (isSignedIn) {
-  //     navigate("/dashBoard");
-  //   }
-  // }, [isSignedIn, navigate]);
+  const handleOpenLoginModal = () => {
+    setIsLoginModalOpen(true)
+  }
+
+  const handleCloseLoginModal = () => {
+    setIsLoginModalOpen(false)
+    setEmail('')
+    setPassword('')
+    setError('') // Clear any existing error messages when closing the modal
+  }
+
+  const handleOpenSignupModal = () => {
+    setIsSignupModalOpen(true)
+  }
+
+  const handleCloseSignupModal = () => {
+    setIsSignupModalOpen(false)
+    setEmail('')
+    setPassword('')
+    setError('') // Clear any existing error messages when closing the modal
+  }
+
+  const handleLogin = () => {
+    if (!email) {
+      setError('Please fill in Email*')
+      return
+    }
+    if (!password) {
+      setError('Please fill in Password*')
+      return
+    }
+    if (password.length < 8) {
+      setError('Password should be at least 8 characters long *')
+      return
+    }
+    // Handle login logic here
+    console.log('Email:', email)
+    console.log('Password:', password)
+    handleCloseLoginModal()
+  }
+
+  const handleSignup = () => {
+    if (!email) {
+      setError('Please fill in Email*')
+      return
+    }
+    if (!password) {
+      setError('Please fill in Password*')
+      return
+    }
+    if (password.length < 8) {
+      setError('Password should be at least 8 characters long *')
+      return
+    }
+    // Handle signup logic here
+    console.log('Email:', email)
+    console.log('Password:', password)
+    handleCloseSignupModal()
+  }
+
+  const handleOverlayClick = (event) => {
+    if (event.target.classList.contains('modal-overlay')) {
+      handleCloseLoginModal()
+      handleCloseSignupModal()
+    }
+  }
 
   return (
     <div className="login-container">
@@ -70,7 +134,7 @@ const Login = () => {
                 <div className="col-xl-6 col-lg-6 p-5 col-md-6 d-flex flex-column">
                   <div
                     className="card card-plain pb-5"
-                    style={{ border: "none", marginTop: "20%" }}
+                    style={{ border: 'none', marginTop: '20%' }}
                   >
                     <div className="col text-center">
                       <img
@@ -84,35 +148,34 @@ const Login = () => {
                       <h6 className="font-weight-bolder text-dark text-center">
                         Click on the below SSO Link
                       </h6>
-
                       <div className="text-center">
                         <SignedOut>
-                          <SignInButton mode="modal">
-                            <button className="btn btn-dark mt-5 px-5">
-                              Sign In
-                            </button>
-                          </SignInButton>
+                          <button
+                            className="btn btn-dark mt-5 px-5"
+                            onClick={handleOpenLoginModal}
+                          >
+                            Sign In
+                          </button>
                         </SignedOut>
                         <SignedIn>
                           {/* Optional: Button to go to the dashboard manually */}
                           <button
                             className="btn btn-dark mt-5 mx-2"
-                            onClick={() => navigate("/dashBoard")}
+                            onClick={() => navigate('/dashBoard')}
                           >
                             Go to Admin Dashboard
                           </button>
                           <button
                             className="btn btn-dark mt-5"
-                            onClick={() => navigate("/UserDashboard")}
+                            onClick={() => navigate('/UserDashboard')}
                           >
                             Go to User Dashboard
                           </button>
                         </SignedIn>
                       </div>
-
                       <p
                         className="mt-3 text-center"
-                        style={{ fontFamily: "roboto" }}
+                        style={{ fontFamily: 'roboto' }}
                       >
                         © 2024 Jindal Steel & Power | All Rights Reserved.
                       </p>
@@ -124,7 +187,7 @@ const Login = () => {
           </div>
         </section>
       </main>
-      <footer className="footerr p-3 bg-dark fixed-bottom">
+      <footer className="footer p-3 bg-dark fixed-bottom">
         <div className="container-fluid">
           <div className="row align-items-center justify-content-lg-between">
             <div className="col-lg-12 mb-lg-0 py-1 text-center">
@@ -136,8 +199,103 @@ const Login = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
-};
 
-export default Login;
+      {isLoginModalOpen && (
+        <div className="modal-overlay" onClick={handleOverlayClick}>
+          <div className="modal-container">
+            <button className="close-button" onClick={handleCloseLoginModal}>
+              &times;
+            </button>
+            <h2>Login to your account</h2>
+            <p>Enter your email and password to log in</p>
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="modal-input"
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="modal-input"
+            />
+            {error && <p className="error-message">{error}</p>}
+            <button className="btn btn-dark w-50 m-4" onClick={handleLogin}>
+              Log In
+            </button>
+            <p>
+              Don't have an account?{' '}
+              <button
+                className="btn-link"
+                onClick={() => {
+                  handleCloseLoginModal()
+                  handleOpenSignupModal()
+                }}
+              >
+                Sign Up
+              </button>
+            </p>
+            <p>
+              By clicking continue, you agree to our{' '}
+              <a href="/terms">Terms of Service</a> and{' '}
+              <a href="/privacy">Privacy Policy</a>.
+            </p>
+          </div>
+        </div>
+      )}
+
+      {isSignupModalOpen && (
+        <div className="modal-overlay" onClick={handleOverlayClick}>
+          <div className="modal-container">
+            <button className="close-button" onClick={handleCloseSignupModal}>
+              &times;
+            </button>
+            <h2>Sign Up for a new account</h2>
+            <p>Enter your email and password to sign up</p>
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="modal-input"
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="modal-input"
+            />
+            {error && <p className="error-message">{error}</p>}
+            <button className="btn btn-dark w-50 m-4" onClick={handleSignup}>
+              Sign Up
+            </button>
+            <p>
+              Already have an account?{' '}
+              <button
+                className="btn-link"
+                onClick={() => {
+                  handleCloseSignupModal()
+                  handleOpenLoginModal()
+                }}
+              >
+                Log In
+              </button>
+            </p>
+            <p>
+              By clicking continue, you agree to our{' '}
+              <a href="/terms">Terms of Service</a> and{' '}
+              <a href="/privacy">Privacy Policy</a>.
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default Login
+
