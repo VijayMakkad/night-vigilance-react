@@ -1,87 +1,86 @@
-import React, { useState } from 'react';
-import './Login.css'; // Custom CSS file for styling
-import JindalLogo from '../../assets/images/google-icon.png';
-import Night_vigilane from '../../assets/images/night-vigilance_logo-2.png';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
-import { useNavigate } from 'react-router-dom';
-import { SignedIn, SignedOut, useAuth } from '@clerk/clerk-react';
-import UserDashboard from '../../User Dashboard/UserDashBoard';
+import React, { useState } from "react";
+import "./Login.css";
+import JindalLogo from "../../assets/images/google-icon.png";
+import NightVigilanceLogo from "../../assets/images/night-vigilance_logo-2.png";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const navigate = useNavigate()
-  const { isSignedIn } = useAuth()
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
-  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const navigate = useNavigate();
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleOpenLoginModal = () => {
-    setIsLoginModalOpen(true)
-  }
+    setIsLoginModalOpen(true);
+  };
 
   const handleCloseLoginModal = () => {
-    setIsLoginModalOpen(false)
-    setEmail('')
-    setPassword('')
-    setError('') // Clear any existing error messages when closing the modal
-  }
+    setIsLoginModalOpen(false);
+    resetForm();
+  };
 
   const handleOpenSignupModal = () => {
-    setIsSignupModalOpen(true)
-  }
+    setIsSignupModalOpen(true);
+  };
 
   const handleCloseSignupModal = () => {
-    setIsSignupModalOpen(false)
-    setEmail('')
-    setPassword('')
-    setError('') // Clear any existing error messages when closing the modal
-  }
+    setIsSignupModalOpen(false);
+    resetForm();
+  };
+
+  const resetForm = () => {
+    setEmail("");
+    setPassword("");
+    setError("");
+  };
 
   const handleLogin = () => {
     if (!email) {
-      setError('Please fill in Email*')
-      return
+      setError("Please fill in Email*");
+      return;
     }
     if (!password) {
-      setError('Please fill in Password*')
-      return
+      setError("Please fill in Password*");
+      return;
     }
     if (password.length < 8) {
-      setError('Password should be at least 8 characters long *')
-      return
+      setError("Password should be at least 8 characters long *");
+      return;
     }
-    // Handle login logic here
-    console.log('Email:', email)
-    console.log('Password:', password)
-    handleCloseLoginModal()
-  }
+    // Simulate authentication
+    setIsAuthenticated(true);
+    handleCloseLoginModal();
+  };
 
   const handleSignup = () => {
     if (!email) {
-      setError('Please fill in Email*')
-      return
+      setError("Please fill in Email*");
+      return;
     }
     if (!password) {
-      setError('Please fill in Password*')
-      return
+      setError("Please fill in Password*");
+      return;
     }
     if (password.length < 8) {
-      setError('Password should be at least 8 characters long *')
-      return
+      setError("Password should be at least 8 characters long *");
+      return;
     }
     // Handle signup logic here
-    console.log('Email:', email)
-    console.log('Password:', password)
-    handleCloseSignupModal()
-  }
+    console.log("Email:", email);
+    console.log("Password:", password);
+    handleCloseSignupModal();
+  };
 
   const handleOverlayClick = (event) => {
-    if (event.target.classList.contains('modal-overlay')) {
-      handleCloseLoginModal()
-      handleCloseSignupModal()
+    if (event.target.classList.contains("modal-overlay")) {
+      handleCloseLoginModal();
+      handleCloseSignupModal();
     }
-  }
+  };
 
   return (
     <div className="login-container">
@@ -134,48 +133,50 @@ const Login = () => {
                 <div className="col-xl-6 col-lg-6 p-5 col-md-6 d-flex flex-column">
                   <div
                     className="card card-plain pb-5"
-                    style={{ border: 'none', marginTop: '20%' }}
+                    style={{ border: "none", marginTop: "20%" }}
                   >
                     <div className="col text-center">
                       <img
-                        src={Night_vigilane}
+                        src={NightVigilanceLogo}
                         width="100"
                         className="img-fluid"
                         alt="Night Vigilance Logo"
                       />
                     </div>
                     <div className="card-body p-2 px-4 mt-5">
-                      <h6 className="font-weight-bolder text-dark text-center">
-                        Click on the below SSO Link
-                      </h6>
-                      <div className="text-center">
-                        <SignedOut>
+                      {!isAuthenticated ? (
+                        <div className="text-center">
                           <button
-                            className="btn btn-dark mt-5 px-5"
+                            className="btn btn-dark mt-5 mx-2 px-5"
                             onClick={handleOpenLoginModal}
                           >
                             Sign In
                           </button>
-                        </SignedOut>
-                        <SignedIn>
-                          {/* Optional: Button to go to the dashboard manually */}
-                          <button
-                            className="btn btn-dark mt-5 mx-2"
-                            onClick={() => navigate('/dashBoard')}
-                          >
-                            Go to Admin Dashboard
-                          </button>
-                          <button
-                            className="btn btn-dark mt-5"
-                            onClick={() => navigate('/UserDashboard')}
-                          >
-                            Go to User Dashboard
-                          </button>
-                        </SignedIn>
-                      </div>
+                        </div>
+                      ) : (
+                        <>
+                          <h6 className="font-weight-bolder text-dark text-center">
+                            Click on the below SSO Link
+                          </h6>
+                          <div className="text-center">
+                            <button
+                              className="btn btn-dark mt-5 mx-2"
+                              onClick={() => navigate("/dashBoard")}
+                            >
+                              Go to Admin Dashboard
+                            </button>
+                            <button
+                              className="btn btn-dark mt-5"
+                              onClick={() => navigate("/UserDashboard")}
+                            >
+                              Go to User Dashboard
+                            </button>
+                          </div>
+                        </>
+                      )}
                       <p
                         className="mt-3 text-center"
-                        style={{ fontFamily: 'roboto' }}
+                        style={{ fontFamily: "roboto" }}
                       >
                         © 2024 Jindal Steel & Power | All Rights Reserved.
                       </p>
@@ -227,20 +228,20 @@ const Login = () => {
               Log In
             </button>
             <p>
-              Don't have an account?{' '}
+              Don't have an account?{" "}
               <button
                 className="btn-link"
                 onClick={() => {
-                  handleCloseLoginModal()
-                  handleOpenSignupModal()
+                  handleCloseLoginModal();
+                  handleOpenSignupModal();
                 }}
               >
                 Sign Up
               </button>
             </p>
             <p>
-              By clicking continue, you agree to our{' '}
-              <a href="/terms">Terms of Service</a> and{' '}
+              By clicking continue, you agree to our{" "}
+              <a href="/terms">Terms of Service</a> and{" "}
               <a href="/privacy">Privacy Policy</a>.
             </p>
           </div>
@@ -274,28 +275,27 @@ const Login = () => {
               Sign Up
             </button>
             <p>
-              Already have an account?{' '}
+              Already have an account?{" "}
               <button
                 className="btn-link"
                 onClick={() => {
-                  handleCloseSignupModal()
-                  handleOpenLoginModal()
+                  handleCloseSignupModal();
+                  handleOpenLoginModal();
                 }}
               >
                 Log In
               </button>
             </p>
             <p>
-              By clicking continue, you agree to our{' '}
-              <a href="/terms">Terms of Service</a> and{' '}
+              By clicking continue, you agree to our{" "}
+              <a href="/terms">Terms of Service</a> and{" "}
               <a href="/privacy">Privacy Policy</a>.
             </p>
           </div>
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Login
-
+export default Login;
