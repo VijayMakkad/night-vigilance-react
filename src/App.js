@@ -5,7 +5,6 @@ import ReportUi from "./components/UiComponent/ReportUi";
 import UserDashBoardUI from "./components/UiComponent/UserDashBoardUI";
 import UserReportUi from "./components/UiComponent/UserReportUI";
 
-const CLERK_API_KEY = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
 
 function App() {
   return (

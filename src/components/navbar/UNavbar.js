@@ -2,7 +2,6 @@ import "./navbar.css";
 import Profile from "../../assets/images/user/01.jpg";
 import { useState } from "react";
 import ProfilePopup from "./ProfilePopup";
-import Clerk from "../../clerk auth/clerk";
 
 const UNavbar = () => {
   const [popupVisible, setPopupVisible] = useState(false);
@@ -25,7 +24,6 @@ const UNavbar = () => {
           </span>
         </span>
         <div className="user">
-          <Clerk />
         </div>
       </div>
       <ProfilePopup trigger={popupVisible} setTrigger={setPopupVisible} />
