@@ -22,8 +22,7 @@ const RNavbar = () => {
             /<p>Home</p>
           </span>
         </span>
-        <div className="user">
-        </div>
+        <div className="user"></div>
       </div>
       <ProfilePopup trigger={popupVisible} setTrigger={setPopupVisible} />
     </nav>

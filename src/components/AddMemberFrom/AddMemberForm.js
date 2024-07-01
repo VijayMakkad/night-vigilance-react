@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import './AddMemberForm.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { useEffect, useState } from "react";
+import "./AddMemberForm.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTimes,
   faPencil,
@@ -8,32 +8,32 @@ import {
   faTrash,
   faXmark,
   faPlus,
-} from '@fortawesome/free-solid-svg-icons'
-import AddPopup from './../Popup/AddPopup'
-import TeamView from './../TeamViewPopup/TeamViewPopup'
-import EditView from './../EditViewPopup/EditViewPopup'
-import axios from 'axios'
+} from "@fortawesome/free-solid-svg-icons";
+import AddPopup from "./../Popup/AddPopup";
+import TeamView from "./../TeamViewPopup/TeamViewPopup";
+import EditView from "./../EditViewPopup/EditViewPopup";
+import axios from "axios";
 
 const AddMemberForm = ({ trigger, setTrigger }) => {
-  const [data, setData] = useState([])
-  const [searchTerm, setSearchTerm] = useState('')
-  const [entries, setEntries] = useState(10)
-  const [popupVisible, setPopupVisible] = useState(false)
-  const [teamViewVisible, setTeamViewVisible] = useState(false)
-  const [editVisible, setEditViewVisible] = useState(false)
+  const [data, setData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [entries, setEntries] = useState(10);
+  const [popupVisible, setPopupVisible] = useState(false);
+  const [teamViewVisible, setTeamViewVisible] = useState(false);
+  const [editVisible, setEditViewVisible] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/saveRoaster')
-        setData(response.data)
+        const response = await axios.get("/api/saveRoaster");
+        setData(response.data);
       } catch (error) {
-        console.error('Error fetching data:', error)
+        console.error("Error fetching data:", error);
       }
-    }
+    };
 
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   const filteredData = data.filter((item) => {
     return (
@@ -43,22 +43,22 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
       item.securityStaff.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.scheduleDate.includes(searchTerm) ||
       item.scheduleTime.includes(searchTerm)
-    )
-  })
+    );
+  });
 
   const closeParentPopup = () => {
-    setTrigger(false)
-  }
+    setTrigger(false);
+  };
 
   useEffect(() => {
     const closePopup = (e) => {
-      if (e.key === 'Escape') {
-        setTrigger(false)
+      if (e.key === "Escape") {
+        setTrigger(false);
       }
-    }
-    window.addEventListener('keydown', closePopup)
-    return () => window.removeEventListener('keydown', closePopup)
-  }, [setTrigger])
+    };
+    window.addEventListener("keydown", closePopup);
+    return () => window.removeEventListener("keydown", closePopup);
+  }, [setTrigger]);
 
   return trigger ? (
     <div className="popup">
@@ -133,7 +133,7 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
                     />
                     <button
                       className="btn btn-outline-secondary ms-2"
-                      onClick={() => setSearchTerm('')}
+                      onClick={() => setSearchTerm("")}
                     >
                       <FontAwesomeIcon icon={faXmark} />
                     </button>
@@ -143,7 +143,7 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
               <table
                 id="example"
                 className="nowrap table-bordered"
-                style={{ width: '100%' }}
+                style={{ width: "100%" }}
               >
                 <thead className="tbs">
                   <tr>
@@ -198,7 +198,7 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
               </table>
               <div className="d-flex justify-content-between">
                 <div>
-                  Showing {Math.min(entries, filteredData.length)} of{' '}
+                  Showing {Math.min(entries, filteredData.length)} of{" "}
                   {filteredData.length} entries
                 </div>
               </div>
@@ -223,8 +223,7 @@ const AddMemberForm = ({ trigger, setTrigger }) => {
         data={data}
       />
     </div>
-  ) : null
-}
+  ) : null;
+};
 
-export default AddMemberForm
-  
+export default AddMemberForm;
