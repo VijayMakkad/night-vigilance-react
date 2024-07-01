@@ -56,6 +56,11 @@ const Login = () => {
         return;
       }
     }
+    // Simulate authentication
+    setIsAuthenticated(true)
+    handleCloseLoginModal()
+  }
+
 
     try {
       const response = await axios.post(
@@ -139,10 +144,10 @@ const Login = () => {
                   <li className="nav-item justify-content-right">
                     <a className="nav-link align-items-right" href="/">
                       <img
-                        src={JindalLogo}
-                        className="navbar-brand-img"
-                        alt="Jindal Logo"
-                        width="10%"
+                        src={NightVigilanceLogo}
+                        width="100"
+                        className="img-fluid"
+                        alt="Night Vigilance Logo"
                       />
                     </a>
                   </li>
@@ -283,7 +288,6 @@ const Login = () => {
             </div>
           </div>
         )}
-
         {isSignupModalOpen && (
           <div className="modal-overlay" onClick={handleOverlayClick}>
             <div className="modal-container">
@@ -336,3 +340,4 @@ const Login = () => {
 };
 
 export default Login;
+
